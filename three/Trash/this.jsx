@@ -78,7 +78,7 @@ import Slice18 from "../assets/car/SliceH18.svg";
 import { useState } from "react";
 
 // svg importation
-import { svgPaths } from "../assets/svgPaths/paths";
+import { svgPaths } from "./paths";
 
 export default function CarDiagram() {
   const [markers, setMarkers] = useState({});
@@ -144,3 +144,49 @@ export default function CarDiagram() {
     </div>
   );
 }
+
+{
+  /* <div className="flex flex-col gap-2">
+        <PrimaryButton onClick={() => alert("Button clicked!")}>
+          Primary Action
+        </PrimaryButton>
+        <SecondaryButton onClick={() => alert("Secondary button clicked!")}>
+          Secondary Action
+        </SecondaryButton>
+        <TertiaryButton onClick={() => alert("Tertiary button clicked!")}>
+          Tertiary Action
+        </TertiaryButton>
+        <ProgressBar progress={50} />
+      </div> */
+}
+
+{
+  /* <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="574"
+        height="327"
+        fill="none"
+      >
+        <g>
+          <path fill="transparent" d={accidentCar.d1} />
+          <path fill="transparent" d={accidentCar.d2} />
+          <path fill="transparent" d={accidentCar.d3} />
+          <path fill="transparent" d={accidentCar.d4} />
+          <path fill="transparent" d={accidentCar.d5} />
+          <path fill="transparent" d={accidentCar.d6} />
+          <path fill="transparent" d={accidentCar.d7} />
+          <path fill="transparent" d={accidentCar.d8} />
+          <path fill="transparent" d={accidentCar.d9} />
+          <path fill="transparent" d={accidentCar.d10} />
+          <path fill="transparent" d={accidentCar.d11} />
+          <path fill="transparent" d={accidentCar.d12} />
+          <path fill="transparent" d={accidentCar.d13} />
+        </g>
+        <path fill="#304A6E" d={accidentCar.d14} />
+      </svg> */
+}
+
+// import PrimaryButton from "./primaryButton";
+// import ProgressBar from "./progressBar";
+// import SecondaryButton from "./secondaryButton";
+// import TertiaryButton from "./tertiaryButton";

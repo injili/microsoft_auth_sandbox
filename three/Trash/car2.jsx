@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // svg importation
-import { svgPaths } from "../assets/svgPaths/paths";
+import { svgPaths } from "./paths";
 
 export default function Diagram() {
   const [markers, setMarkers] = useState({});

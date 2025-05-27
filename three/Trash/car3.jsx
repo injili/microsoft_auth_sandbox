@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { car } from "../assets/svgPaths/car";
+import { car } from "./car";
 export default function DiagramCar() {
   const [markers, setMarkers] = useState([]);
   const handleClick = (event) => {
