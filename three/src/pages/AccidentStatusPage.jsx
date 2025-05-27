@@ -3,7 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { AnimatePresence, easeOut, motion } from "framer-motion";
+import { AnimatePresence, easeOut, motion, spring } from "framer-motion";
 import { useState, Fragment } from "react";
 
 import NoCheckbox from "../components/noCheckbox";
@@ -14,12 +14,37 @@ import SecondaryButton from "../components/secondaryButton";
 import PrimaryButton from "../components/primaryButton";
 
 import AccidentStatusCar from "../components/accidentStatusCar";
-import ButtonTest from "../components/buttonTest";
+import ButtonYes from "../components/buttonYes";
+import ButtonNo from "../components/buttonNo";
+import TakePhoto from "../components/takePhoto";
 
 export default function AccidentStatusPage() {
+  const [clickYes, setClickYes] = useState(false);
+  const [clickNo, setClickNo] = useState(false);
   const [isAccidentFree, setIsAccidentFree] = useState(null);
   const [currentClicked, setCurrentClicked] = useState(false);
   const [repairedClicked, setRepairedClicked] = useState(false);
+
+  const handleClickYes = () => {
+    if (clickYes) {
+      setClickYes(false);
+    } else {
+      setClickNo(false);
+      setIsAccidentFree(false);
+      setClickYes(true);
+    }
+  };
+
+  const handleClickNo = () => {
+    if (clickNo) {
+      setClickNo(false);
+      setIsAccidentFree(false);
+    } else {
+      setClickYes(false);
+      setClickNo(true);
+      setIsAccidentFree(true);
+    }
+  };
 
   const handleCurrentClick = () => {
     if (currentClicked) {
@@ -38,10 +63,8 @@ export default function AccidentStatusPage() {
     }
   };
 
-  const handleYes = () => setIsAccidentFree(true);
-  const handleNo = () => setIsAccidentFree(false);
   return (
-    <div className="flex flex-col gap-4 min-w-7/8">
+    <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
           Accident Status
@@ -50,28 +73,35 @@ export default function AccidentStatusPage() {
           What is the Accident Status on the vehicle’s body?
         </p>
       </div>
-      <div className="bg-white rounded-sm p-8 items-center justify-center neumorphic">
+      <div className="bg-white rounded-sm p-8 items-center justify-center">
         <p className="font-montserrat font-medium">
           Is the vehicle accident free?
         </p>
         <div className="flex py-2 gap-4">
-          <ButtonTest />
-          <YesCheckbox onClick={handleYes} />
-          <NoCheckbox onClick={handleNo} />
+          <ButtonYes onClick={handleClickYes} showIcon={clickYes} />
+          <ButtonNo onClick={handleClickNo} showIcon={clickNo} />
         </div>
+
         <Disclosure
           as="div"
-          className="w-full border-l-2 border-[#2154A2] ml-4 pl-4"
+          className="w-full mt-2 border-l-2 border-[#2154A2] ml-4 pl-4"
         >
-          <div className="overflow-hidden py-2">
+          <div className="overflow-hidden">
             <AnimatePresence>
-              {isAccidentFree === false && (
+              {isAccidentFree && (
                 <DisclosurePanel static as={Fragment}>
                   <motion.div
-                    initial={{ opacity: 0, y: -24 }}
+                    initial={{ opacity: 0, y: -40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -24 }}
-                    transition={{ duration: 0.5, ease: easeOut }}
+                    exit={{ opacity: 0, y: -40 }}
+                    transition={{
+                      opacity: { duration: 0.5, ease: "easeOut" },
+                      y: { type: "spring", stiffness: 100, damping: 30 },
+                      default: {
+                        duration: 0.1,
+                        ease: "easeOut",
+                      },
+                    }}
                     className="origin-top"
                   >
                     <div className="flex flex-col gap-2">
@@ -96,16 +126,21 @@ export default function AccidentStatusPage() {
                         <p className="font-montserrat font-medium">
                           Damage Cost
                         </p>
-                        <input
-                          type="text"
-                          className="border-1 max-w-96 p-2 rounded-sm border-[#2154A2] focus:outline-none focus:border-[#2C6DD1] font-montserrat"
-                        ></input>
+                        <div className=" flex items-center gap-2 border-1 max-w-96 px-2 py-1.5 rounded-sm border-[#2154A2] focus-within:border-2 font-montserrat">
+                          <input
+                            type="text"
+                            className="outline-none w-full bg-transparent"
+                          ></input>
+                          <p className="px-2 font-montserrat text-lg font-medium">
+                            €
+                          </p>
+                        </div>
                       </div>
                       <div className="flex flex-col gap-1">
                         <p className="font-montserrat font-medium">
                           Damaged Parts
                         </p>
-                        <p className="font-montserrat font-medium">
+                        <p className="font-montserrat font-medium text-sm">
                           Tap on the diagram to give details on the damage
                         </p>
                         <AccidentStatusCar />
