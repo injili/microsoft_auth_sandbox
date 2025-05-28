@@ -3,7 +3,19 @@ import Webcam from "react-webcam";
 
 export default function TakePhoto() {
   const webcamRef = useRef(null);
+  const [isCameraOn, setIsCameraOn] = useState(false);
   const [image, setImage] = useState(null);
+
+  const toggleCamera = () => {
+    if (isCameraOn) {
+      setIsCameraOn(false);
+      setImage(null);
+    } else {
+      setIsCameraOn(true);
+      // If you want to reset the image when the camera is turned on
+      setImage(null);
+    }
+  };
 
   const capture = () => {
     const screenshot = webcamRef.current.getScreenshot();
@@ -13,6 +25,7 @@ export default function TakePhoto() {
   return (
     <div className="flex flex-col items-center gap-4 p-4">
       <button
+        onClick={toggleCamera}
         className={`flex font-poppins items-center gap-2 justify-center text-[#2154A2] text-sm max-w-96 border border-[#2154A2]  px-10 py-1.5 rounded-sm hover:border-[#2C6DD1] hover:text-[#2C6DD1] hover:shadow-lg transition-colors focus:outline-none focus:border focus:border-2 focus:rounded-sm focus:shadow-md`}
       >
         <svg
@@ -23,30 +36,33 @@ export default function TakePhoto() {
         >
           <path d="M25 5.469V19.53a2.344 2.344 0 0 1-2.344 2.344H2.344A2.344 2.344 0 0 1 0 19.531V5.47a2.344 2.344 0 0 1 2.344-2.344H6.64l.6-1.606A2.34 2.34 0 0 1 9.434 0h6.128c.976 0 1.85.605 2.192 1.519l.605 1.606h4.297A2.344 2.344 0 0 1 25 5.469ZM18.36 12.5a5.864 5.864 0 0 0-5.86-5.86 5.864 5.864 0 0 0-5.86 5.86 5.864 5.864 0 0 0 5.86 5.86 5.864 5.864 0 0 0 5.86-5.86Zm-1.563 0a4.303 4.303 0 0 1-4.297 4.297A4.303 4.303 0 0 1 8.203 12.5 4.303 4.303 0 0 1 12.5 8.203a4.303 4.303 0 0 1 4.297 4.297Z" />
         </svg>
-        Take Photo
+        {isCameraOn ? "Turn Camera Off" : "Take Photo"}
       </button>
+      {isCameraOn && (
+        <>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            className="rounded-md shadow-lg max-w-sm"
+            videoConstraints={{ facingMode: "user" }}
+          />
+          <button
+            onClick={capture}
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Capture
+          </button>
 
-      {/* <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        className="rounded-md shadow-lg max-w-sm"
-        videoConstraints={{ facingMode: "user" }}
-      />
-      <button
-        onClick={capture}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Capture
-      </button>
-
-      {image && (
-        <img
-          src={image}
-          alt="Captured"
-          className="mt-4 rounded shadow-md max-w-sm"
-        />
-      )} */}
+          {image && (
+            <img
+              src={image}
+              alt="Captured"
+              className="mt-4 rounded shadow-md max-w-sm"
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }
