@@ -146,7 +146,7 @@ export default function AccidentStatusPage() {
                         <AccidentStatusCar />
                       </div>
                       <div className="flex flex-col gap-1">
-                        <p className="font-montserrat font-medium">Key</p>
+                        <p className="font-montserrat font-bold">Key</p>
                         <div className="flex items-center gap-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

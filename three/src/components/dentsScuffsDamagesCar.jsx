@@ -1,8 +1,16 @@
+import { Dialog, DialogPanel } from "@headlessui/react";
 import { useState, useRef } from "react";
 import { car } from "../assets/svgPaths/dentsScuffsDamagesSvg";
+import RegularButton from "./regularButton";
+import PrimaryButton from "./primaryButton";
+import TakePhoto from "./takePhoto";
+import UploadFile from "./uploadFile";
 
 export default function DentsScuffsDamagesCar() {
   const [markers, setMarkers] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedDamage, setSelectedDamage] = useState(null);
+  const [damageColor, setDamageColor] = useState("red");
   const svgRef = useRef(null);
   const markerRadius = 10.5;
 
@@ -15,17 +23,17 @@ export default function DentsScuffsDamagesCar() {
   };
 
   const handleClick = (event) => {
+    if (!selectedDamage) return;
+
     const svg = svgRef.current;
     const rect = svg.getBoundingClientRect();
-
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    if (isNearExistingMarker(x, y)) {
-      return;
-    }
+    if (isNearExistingMarker(x, y)) return;
 
-    setMarkers((prev) => [...prev, { x, y }]);
+    setMarkers((prev) => [...prev, { x, y, color: damageColor }]);
+    setIsOpen(true);
   };
 
   return (
@@ -52,13 +60,73 @@ export default function DentsScuffsDamagesCar() {
               key={index}
               x={marker.x - 8.5}
               y={marker.y - 8}
-              fill="red"
+              fill={marker.color}
               width="17"
               height="16"
             />
           ))}
         </g>
       </svg>
+      <Dialog open={isOpen} className="relative z-50">
+        <div className="fixed inset-0 flex w-screen items-center justify-center bg-primary/30 p-4">
+          <DialogPanel className="min-w-6/8 flex flex-col gap-3 space-y-4 bg-white p-12 rounded-sm">
+            <div className="flex flex-col">
+              <p className="font-montserrat font-medium">
+                Write the details on the damage here.
+              </p>
+              <textarea className="min-h-24 p-2 max-w-96 border border-primary rounded-sm focus:border-2 focus:outline-none" />
+            </div>
+            <div>
+              <p className="font-montserrat font-medium">
+                Upload or take a photo of the marked positions here.
+              </p>
+              <div className="flex items-center gap-2">
+                <TakePhoto />
+                <UploadFile />
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-montserrat font-medium">
+                Was it a minor damage or significant damage?
+              </p>
+              <div className="flex gap-4">
+                <RegularButton
+                  onClick={() => {
+                    setSelectedDamage("dent");
+                    setDamageColor("yellow");
+                  }}
+                  showIcon={false}
+                >
+                  Dent
+                </RegularButton>
+                <RegularButton
+                  onClick={() => {
+                    setSelectedDamage("scuff");
+                    setDamageColor("yellow");
+                  }}
+                  showIcon={false}
+                >
+                  Scuff
+                </RegularButton>
+                <RegularButton
+                  onClick={() => {
+                    setSelectedDamage("scratch");
+                    setDamageColor("red");
+                  }}
+                  showIcon={true}
+                >
+                  Scratch
+                </RegularButton>
+              </div>
+            </div>
+            <div className="flex w-full justify-end gap-4">
+              <PrimaryButton onClick={() => setIsOpen(false)}>
+                Submit
+              </PrimaryButton>
+            </div>
+          </DialogPanel>
+        </div>
+      </Dialog>
     </div>
   );
 }
