@@ -8,6 +8,7 @@ import UploadFile from "./uploadFile";
 
 export default function DentsScuffsDamagesCar() {
   const [markers, setMarkers] = useState([]);
+  const [pendingMarker, setPendingMarker] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDamage, setSelectedDamage] = useState(null);
   const [damageColor, setDamageColor] = useState("red");
@@ -32,8 +33,14 @@ export default function DentsScuffsDamagesCar() {
 
     if (isNearExistingMarker(x, y)) return;
 
-    setMarkers((prev) => [...prev, { x, y, color: damageColor }]);
+    setPendingMarker({ x, y, color: damageColor });
     setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setSelectedDamage(null);
+    setDamageColor("red");
   };
 
   return (
@@ -67,7 +74,7 @@ export default function DentsScuffsDamagesCar() {
           ))}
         </g>
       </svg>
-      <Dialog open={isOpen} className="relative z-50">
+      <Dialog open={isOpen} onClose={handleClose} className="relative z-50">
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-primary/30 p-4">
           <DialogPanel className="min-w-6/8 flex flex-col gap-3 space-y-4 bg-white p-12 rounded-sm">
             <div className="flex flex-col">
@@ -120,7 +127,14 @@ export default function DentsScuffsDamagesCar() {
               </div>
             </div>
             <div className="flex w-full justify-end gap-4">
-              <PrimaryButton onClick={() => setIsOpen(false)}>
+              <PrimaryButton
+                onClick={() => {
+                  if (pendingMarker)
+                    setMarkers((prev) => [...prev, pendingMarker]);
+                  setIsOpen(false);
+                  setPendingMarker(null);
+                }}
+              >
                 Submit
               </PrimaryButton>
             </div>
