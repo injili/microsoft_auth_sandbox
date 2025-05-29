@@ -1,17 +1,16 @@
-import { Dialog, DialogPanel } from "@headlessui/react";
 import { useState, useRef } from "react";
 import { car } from "../assets/svgPaths/dentsScuffsDamagesSvg";
-import RegularButton from "./regularButton";
-import PrimaryButton from "./primaryButton";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import TakePhoto from "./takePhoto";
 import UploadFile from "./uploadFile";
+import RegularButton from "./regularButton";
+import PrimaryButton from "./primaryButton";
 
 export default function DentsScuffsDamagesCar() {
   const [markers, setMarkers] = useState([]);
-  const [pendingMarker, setPendingMarker] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDamage, setSelectedDamage] = useState(null);
-  const [damageColor, setDamageColor] = useState("red");
+  const [activeMarker, setActiveMarker] = useState(null);
+
   const svgRef = useRef(null);
   const markerRadius = 10.5;
 
@@ -24,25 +23,26 @@ export default function DentsScuffsDamagesCar() {
   };
 
   const handleClick = (event) => {
-    if (!selectedDamage) return;
-
     const svg = svgRef.current;
     const rect = svg.getBoundingClientRect();
+
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
+    const color = "red";
 
     if (isNearExistingMarker(x, y)) return;
-
-    setPendingMarker({ x, y, color: damageColor });
     setIsOpen(true);
+    setActiveMarker({ x, y, color });
+    console.log(activeMarker);
   };
 
-  const handleClose = () => {
+  const handleCloseDialog = () => {
     setIsOpen(false);
-    setSelectedDamage(null);
-    setDamageColor("red");
+    if (activeMarker) {
+      setMarkers((prev) => [...prev, activeMarker]);
+      setActiveMarker(null);
+    }
   };
-
   return (
     <div className="p-4">
       <svg style={{ display: "none" }}>
@@ -74,7 +74,11 @@ export default function DentsScuffsDamagesCar() {
           ))}
         </g>
       </svg>
-      <Dialog open={isOpen} onClose={handleClose} className="relative z-50">
+      <Dialog
+        open={isOpen}
+        onClose={() => handleCloseDialog()}
+        className="relative z-50"
+      >
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-primary/30 p-4">
           <DialogPanel className="min-w-6/8 flex flex-col gap-3 space-y-4 bg-white p-12 rounded-sm">
             <div className="flex flex-col">
@@ -99,8 +103,8 @@ export default function DentsScuffsDamagesCar() {
               <div className="flex gap-4">
                 <RegularButton
                   onClick={() => {
-                    setSelectedDamage("dent");
-                    setDamageColor("yellow");
+                    activeMarker &&
+                      setActiveMarker({ ...activeMarker, color: "red" });
                   }}
                   showIcon={false}
                 >
@@ -108,8 +112,8 @@ export default function DentsScuffsDamagesCar() {
                 </RegularButton>
                 <RegularButton
                   onClick={() => {
-                    setSelectedDamage("scuff");
-                    setDamageColor("yellow");
+                    activeMarker &&
+                      setActiveMarker({ ...activeMarker, color: "yellow" });
                   }}
                   showIcon={false}
                 >
@@ -117,8 +121,8 @@ export default function DentsScuffsDamagesCar() {
                 </RegularButton>
                 <RegularButton
                   onClick={() => {
-                    setSelectedDamage("scratch");
-                    setDamageColor("red");
+                    activeMarker &&
+                      setActiveMarker({ ...activeMarker, color: "blue" });
                   }}
                   showIcon={true}
                 >
@@ -129,10 +133,7 @@ export default function DentsScuffsDamagesCar() {
             <div className="flex w-full justify-end gap-4">
               <PrimaryButton
                 onClick={() => {
-                  if (pendingMarker)
-                    setMarkers((prev) => [...prev, pendingMarker]);
-                  setIsOpen(false);
-                  setPendingMarker(null);
+                  handleCloseDialog();
                 }}
               >
                 Submit
