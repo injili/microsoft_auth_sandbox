@@ -3,7 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { AnimatePresence, easeOut, motion, spring } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState, Fragment } from "react";
 
 import NoCheckbox from "../components/noCheckbox";
