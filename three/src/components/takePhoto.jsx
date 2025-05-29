@@ -23,7 +23,7 @@ export default function TakePhoto() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
+    <div className="flex flex-col gap-4 p-4">
       <button
         onClick={toggleCamera}
         className={`flex font-poppins items-center gap-2 justify-center text-[#2154A2] text-sm max-w-96 border border-[#2154A2]  px-10 py-1.5 rounded-sm hover:border-[#2C6DD1] hover:text-[#2C6DD1] hover:shadow-lg transition-colors focus:outline-none focus:border focus:border-2 focus:rounded-sm focus:shadow-md`}
@@ -44,12 +44,12 @@ export default function TakePhoto() {
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            className="rounded-md shadow-lg max-w-sm"
+            className="rounded-sm max-w-sm"
             videoConstraints={{ facingMode: "user" }}
           />
           <button
             onClick={capture}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-[#2154A2] text-white font-poppins text-sm max-w-64 text-bold px-10 py-2 rounded-sm hover:bg-[#2C6DD1] hover:shadow-xl transition-colors focus:outline-none focus:border focus:border-2 focus:rounded-sm focus:border-white focus:shadow-md"
           >
             Capture
           </button>

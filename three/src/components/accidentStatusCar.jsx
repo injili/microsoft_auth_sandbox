@@ -4,17 +4,30 @@ import { useState } from "react";
 import RegularButton from "./regularButton";
 import PrimaryButton from "./primaryButton";
 import TakePhoto from "./takePhoto";
+import UploadFile from "./uploadFile";
 
 export default function AccidentStatusCar() {
   const [activePaths, setActivePaths] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [panelcolor, setPanelColor] = useState("black");
+
   const handlePathClick = (pathId) => {
-    setActivePaths((prev) =>
-      prev.includes(pathId)
-        ? prev.filter((id) => id !== pathId)
-        : [...prev, pathId]
-    );
-    setIsOpen(true);
+    setActivePaths((prev) => {
+      if (prev.includes(pathId)) {
+        return prev.filter((id) => id !== pathId);
+      } else {
+        setIsOpen(true);
+        return [...prev, pathId];
+      }
+    });
+  };
+
+  const significantDamage = () => {
+    setPanelColor((prevColor) => (prevColor === "black" ? "blue" : "black"));
+  };
+
+  const minorDamage = () => {
+    setPanelColor((prevColor) => (prevColor === "black" ? "green" : "black"));
   };
 
   const paths = Object.entries(accidentCar).map(([key, pathData], index) => {
@@ -24,7 +37,7 @@ export default function AccidentStatusCar() {
       <path
         key={key}
         d={pathData}
-        fill={isTogglable ? (isActive ? "red" : "transparent") : "#304A6E"}
+        fill={isTogglable ? (isActive ? panelcolor : "transparent") : "#304A6E"}
         onClick={() => isTogglable && handlePathClick(key)}
         className={isTogglable ? "cursor-pointer" : ""}
       />
@@ -58,8 +71,9 @@ export default function AccidentStatusCar() {
               <p className="font-montserrat font-medium">
                 Upload or take a photo of the damage here.
               </p>
-              <div className="flex gap-4">
+              <div className="flex items-center gap-2">
                 <TakePhoto />
+                <UploadFile />
               </div>
             </div>
             <div className="flex flex-col gap-2">
@@ -67,11 +81,14 @@ export default function AccidentStatusCar() {
                 Was it a minor damage or significant damage?
               </p>
               <div className="flex gap-4">
-                <RegularButton onClick={() => setIsOpen(true)} showIcon={false}>
+                <RegularButton onClick={() => minorDamage()} showIcon={false}>
                   Minor Damage
                 </RegularButton>
 
-                <RegularButton onClick={() => setIsOpen(true)} showIcon={true}>
+                <RegularButton
+                  onClick={() => significantDamage()}
+                  showIcon={true}
+                >
                   Significant Damage
                 </RegularButton>
               </div>
