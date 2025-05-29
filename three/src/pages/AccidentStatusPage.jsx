@@ -145,6 +145,41 @@ export default function AccidentStatusPage() {
                         </p>
                         <AccidentStatusCar />
                       </div>
+                      <div className="flex flex-col gap-1">
+                        <p className="font-montserrat font-medium">Key</p>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="yellow"
+                            viewBox="0 0 20 20"
+                            className="border rounded-full"
+                          >
+                            <circle cx="10" cy="10" r="10" />
+                          </svg>
+
+                          <p className="font-montserrat font-medium text-sm">
+                            - Minor Damage
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="red"
+                            viewBox="0 0 20 20"
+                            className="border rounded-full"
+                          >
+                            <circle cx="10" cy="10" r="10" />
+                          </svg>
+
+                          <p className="font-montserrat font-medium text-sm">
+                            - Significant Damage
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 </DisclosurePanel>
