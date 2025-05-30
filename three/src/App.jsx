@@ -21,11 +21,19 @@ import Color from "./pages/FirstEleven/Color";
 import PriceAsAdvertised from "./pages/FirstEleven/PriceAsAdvertised";
 import CustomerPhoneNumber from "./pages/FirstEleven/CustomerPhoneNumber";
 import OnlineSummary from "./pages/FirstEleven/OnlineSummary";
+import PreviousOwners from "./pages/SecondEleven/PreviousOwners";
+import VehicleIdentificationNumber from "./pages/SecondEleven/VehicleIdentificationNumber";
+import AdditionalEquipment from "./pages/SecondEleven/AdditionalEquipment";
+import InspectionData from "./pages/SecondEleven/InspectionData";
+import Warranty from "./pages/SecondEleven/Warranty";
+import Financing from "./pages/SecondEleven/Financing";
+import AddressCustomerData from "./pages/SecondEleven/AddressCustomerData";
+import CustomerFinalPrice from "./pages/SecondEleven/CustomerFinalPrice";
 
 export default function App() {
   return (
     <div className="min-h-screen py-4 flex flex-col items-center justify-center  bg-linear-to-br from-[#D6DCE5] via-[#F4F9FF] via-[#F4F4F4] to-[#C7D1DF]">
-      <PreviousOwners />
+      <CustomerFinalPrice />
     </div>
   );
 }
