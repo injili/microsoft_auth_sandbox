@@ -4,7 +4,7 @@ export default function RegularButton({ onClick, showIcon, children }) {
       onClick={onClick}
       className={`flex font-poppins items-center gap-2 justify-center text-[#2154A2] text-sm max-w-96  ${
         showIcon ? "border-2 font-bold" : "border font-semibold"
-      } border-[#2154A2]  px-10 py-1.5 rounded-sm hover:border-[#2C6DD1] hover:text-[#2C6DD1] hover:shadow-lg transition-colors focus:outline-none focus:border focus:border-2 focus:rounded-sm focus:shadow-md`}
+      } border-[#2154A2]  px-16 py-1.5 rounded-sm hover:border-[#2C6DD1] hover:text-[#2C6DD1] hover:shadow-lg transition-colors focus:outline-none focus:border focus:border-2 focus:rounded-sm focus:shadow-md`}
     >
       {showIcon && (
         <svg
