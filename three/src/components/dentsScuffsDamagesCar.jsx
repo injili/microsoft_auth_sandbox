@@ -28,7 +28,7 @@ export default function DentsScuffsDamagesCar() {
 
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    const color = "red";
+    const color = "transparent";
 
     if (isNearExistingMarker(x, y)) return;
     setIsOpen(true);
@@ -38,8 +38,10 @@ export default function DentsScuffsDamagesCar() {
 
   const handleCloseDialog = () => {
     setIsOpen(false);
-    if (activeMarker) {
+    if (activeMarker && activeMarker.color !== "transparent") {
       setMarkers((prev) => [...prev, activeMarker]);
+      setActiveMarker(null);
+    } else {
       setActiveMarker(null);
     }
   };

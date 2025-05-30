@@ -84,7 +84,7 @@ export default function AccidentStatusPage() {
 
         <Disclosure
           as="div"
-          className="w-full mt-2 border-l-2 border-[#2154A2] ml-4 pl-4"
+          className="w-full mt-2 border-l-2 border-[#2154A2] ml-4 pl-8"
         >
           <div className="overflow-hidden">
             <AnimatePresence>
