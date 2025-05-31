@@ -51,7 +51,9 @@ export default function TireTreadDepthCar() {
       ></div>
       <div className="flex flex-col justify-between">
         <div className="flex flex-col items-start p-4 mt-16">
-          <p className="px-1 font-montserrat text-lg font-medium">Left Front</p>
+          <p className="px-1 font-montserrat text-lg font-medium">
+            Right Front
+          </p>
           <select
             type="text"
             className="outline-none bg-white border-1 min-w-42 max-w-42 px-2 p-2 rounded-sm border-[#2154A2] focus:border-2 font-montserrat"
@@ -64,7 +66,7 @@ export default function TireTreadDepthCar() {
           </select>
         </div>
         <div className="flex flex-col items-start p-4 mb-30">
-          <p className="px-1 font-montserrat text-lg font-medium">Left Back</p>
+          <p className="px-1 font-montserrat text-lg font-medium">Right Back</p>
           <select
             type="text"
             className="outline-none bg-white border-1 min-w-42 max-w-42 px-2 p-2 rounded-sm border-[#2154A2] focus:border-2 font-montserrat"
