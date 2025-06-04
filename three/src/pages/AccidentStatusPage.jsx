@@ -17,6 +17,7 @@ import AccidentStatusCar from "../components/accidentStatusCar";
 import ButtonYes from "../components/buttonYes";
 import ButtonNo from "../components/buttonNo";
 import TakePhoto from "../components/takePhoto";
+import { Link } from "react-router-dom";
 
 export default function AccidentStatusPage() {
   const [clickYes, setClickYes] = useState(false);
@@ -190,12 +191,18 @@ export default function AccidentStatusPage() {
 
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={() => alert("Back to previous page")}>
-              Back
-            </SecondaryButton>
-            <PrimaryButton onClick={() => alert("Next step")}>
-              Save and Continue
-            </PrimaryButton>
+            <Link to="/onlinepaintinspection">
+              <SecondaryButton
+                onClick={() => console.log("Back to previous page")}
+              >
+                Back
+              </SecondaryButton>
+            </Link>
+            <Link to="/onlinedentsscuffsdamages">
+              <PrimaryButton onClick={() => console.log("Next step")}>
+                Save and Continue
+              </PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

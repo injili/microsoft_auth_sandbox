@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 export default function Model() {
@@ -27,12 +28,18 @@ export default function Model() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={() => alert("Back to previous page")}>
-              Back
-            </SecondaryButton>
-            <PrimaryButton onClick={() => alert("Next step")}>
-              Continue
-            </PrimaryButton>
+            <Link to="/onlinemanufacturer">
+              <SecondaryButton
+                onClick={() => console.log("Back to previous page")}
+              >
+                Back
+              </SecondaryButton>
+            </Link>
+            <Link to="/onlinevehicletype">
+              <PrimaryButton onClick={() => console.log("Next step")}>
+                Continue
+              </PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

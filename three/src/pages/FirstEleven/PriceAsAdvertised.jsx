@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 export default function PriceAsAdvertised() {
@@ -5,7 +6,7 @@ export default function PriceAsAdvertised() {
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
-          Mileage
+          Price As Advertised
         </h2>
         <p className="font-montserrat font-medium">
           What is the vehicle's price as advertised?
@@ -24,12 +25,18 @@ export default function PriceAsAdvertised() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={() => alert("Back to previous page")}>
-              Back
-            </SecondaryButton>
-            <PrimaryButton onClick={() => alert("Next step")}>
-              Continue
-            </PrimaryButton>
+            <Link to="/onlinecolor">
+              <SecondaryButton
+                onClick={() => console.log("Back to previous page")}
+              >
+                Back
+              </SecondaryButton>
+            </Link>
+            <Link to="/onlinecustomerphonenumber">
+              <PrimaryButton onClick={() => console.log("Next step")}>
+                Continue
+              </PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

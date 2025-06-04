@@ -1,4 +1,5 @@
 import PrimaryButton from "../components/primaryButton";
+import { Link } from "react-router-dom";
 
 export default function PasteLink() {
   return (
@@ -16,16 +17,20 @@ export default function PasteLink() {
           className="outline-none w-full border-1 w-full px-2 py-1.5 rounded-sm border-[#2154A2] focus:border-2 font-montserrat"
         ></input>
         <p className="font-montserrat mt-2 font-medium">
-          or{" "}
-          <span className="text-primary underline text-lg">
-            Manually Fill Form
-          </span>
+          or
+          <Link to="/onlinemanufacturer" className="ml-1">
+            <span className="text-primary underline text-lg">
+              Manually Fill Form
+            </span>
+          </Link>
         </p>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <PrimaryButton onClick={() => alert("Next step")}>
-              Continue
-            </PrimaryButton>
+            <Link to="/fillform">
+              <PrimaryButton onClick={() => console.log("Next step")}>
+                Continue
+              </PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

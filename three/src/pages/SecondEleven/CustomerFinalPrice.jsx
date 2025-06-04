@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 export default function CustomerFinalPrice() {
@@ -24,10 +25,14 @@ export default function CustomerFinalPrice() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={() => alert("Back to previous page")}>
-              Back
-            </SecondaryButton>
-            <PrimaryButton onClick={() => alert("Next step")}>
+            <Link to="/onlineaddresscustomerdata">
+              <SecondaryButton
+                onClick={() => console.log("Back to previous page")}
+              >
+                Back
+              </SecondaryButton>
+            </Link>
+            <PrimaryButton onClick={() => console.log("Next step")}>
               Continue
             </PrimaryButton>
           </div>

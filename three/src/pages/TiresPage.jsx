@@ -11,6 +11,7 @@ import ButtonYes from "../components/buttonYes";
 import ButtonNo from "../components/buttonNo";
 import PrimaryButton from "../components/primaryButton";
 import SecondaryButton from "../components/secondaryButton";
+import { Link } from "react-router-dom";
 
 export default function TiresPage() {
   const [summerTires, setSummerTires] = useState(false);
@@ -65,10 +66,10 @@ export default function TiresPage() {
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
-          Accident Status
+          Tires
         </h2>
         <p className="font-montserrat font-medium">
-          What is the Accident Status on the vehicle’s body?
+          What is the Tires configuration on the vehicle’s body?
         </p>
       </div>
       <div className="bg-white rounded-sm p-8 flex flex-col gap-4 justify-center">
@@ -416,12 +417,18 @@ export default function TiresPage() {
         </Disclosure>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={() => alert("Back to previous page")}>
-              Back
-            </SecondaryButton>
-            <PrimaryButton onClick={() => alert("Next step")}>
-              Save and Continue
-            </PrimaryButton>
+            <Link to="/onlinevin">
+              <SecondaryButton
+                onClick={() => console.log("Back to previous page")}
+              >
+                Back
+              </SecondaryButton>
+            </Link>
+            <Link to="/onlineadditionalequipment">
+              <PrimaryButton onClick={() => console.log("Next step")}>
+                Save and Continue
+              </PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

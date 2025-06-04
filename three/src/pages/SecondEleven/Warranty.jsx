@@ -6,6 +6,7 @@ import SecondaryButton from "../../components/secondaryButton";
 import PrimaryButton from "../../components/primaryButton";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
+import { Link } from "react-router-dom";
 
 export default function Warranty() {
   const [clickYes, setClickYes] = useState(false);
@@ -110,12 +111,18 @@ export default function Warranty() {
 
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={() => alert("Back to previous page")}>
-              Back
-            </SecondaryButton>
-            <PrimaryButton onClick={() => alert("Next step")}>
-              Save and Continue
-            </PrimaryButton>
+            <Link to="/onlineinspectiondata">
+              <SecondaryButton
+                onClick={() => console.log("Back to previous page")}
+              >
+                Back
+              </SecondaryButton>
+            </Link>
+            <Link to="/onlinefinancing">
+              <PrimaryButton onClick={() => console.log("Next step")}>
+                Save and Continue
+              </PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

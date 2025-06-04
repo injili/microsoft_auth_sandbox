@@ -1,10 +1,6 @@
-import DentsScuffsDamagesCar from "./components/dentsScuffsDamagesCar";
 import AccidentStatusPage from "./pages/AccidentStatusPage";
-import AccidentStatusCar from "./components/accidentStatusCar";
-import PaintDepthCar from "./components/paintDepthCar";
 import PaintDepthPage from "./pages/PaintDepthPage";
 import DentsScuffsDamagesPage from "./pages/DentsScuffsDamagesPage";
-import TireThreadDepthCar from "./components/tireTreadDepthCar";
 import TiresPage from "./pages/TiresPage";
 import PasteLink from "./pages/PasteLink";
 import FirstElevenFormPage from "./pages/FirstElevenFormPage";
@@ -108,7 +104,7 @@ const router = createBrowserRouter([
         element: <CustomerPhoneNumber />,
       },
       {
-        path: "/onlineonlinesummary",
+        path: "/onlinesummary",
         element: <OnlineSummary />,
       },
       {
@@ -128,8 +124,36 @@ const router = createBrowserRouter([
         element: <DentsScuffsDamagesPage />,
       },
       {
+        path: "/onlinevin",
+        element: <VehicleIdentificationNumber />,
+      },
+      {
         path: "/onlinetires",
         element: <TiresPage />,
+      },
+      {
+        path: "/onlineadditionalequipment",
+        element: <AdditionalEquipment />,
+      },
+      {
+        path: "/onlineinspectiondata",
+        element: <InspectionData />,
+      },
+      {
+        path: "/onlinewarranty",
+        element: <Warranty />,
+      },
+      {
+        path: "/onlinefinancing",
+        element: <Financing />,
+      },
+      {
+        path: "/onlineaddresscustomerdata",
+        element: <AddressCustomerData />,
+      },
+      {
+        path: "/onlinecustomerfinalprice",
+        element: <CustomerFinalPrice />,
       },
     ],
   },
