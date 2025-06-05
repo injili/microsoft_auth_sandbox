@@ -1,9 +1,8 @@
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 import RegularButton from "../../components/regularButton";
-import { Link } from "react-router-dom";
 
-export default function InspectionData() {
+export default function InspectionData({ onBack, onNext }) {
   const types = [
     { label: "Brand Specific Workshop" },
     { label: "Independent Workshop" },
@@ -81,18 +80,8 @@ export default function InspectionData() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlineadditionalequipment">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinewarranty">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Save and Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

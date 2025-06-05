@@ -1,25 +1,16 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
+import { Disclosure, DisclosurePanel } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, Fragment } from "react";
 
-import NoCheckbox from "../components/noCheckbox";
-import ProgressBar from "../components/progressBar";
-import YesCheckbox from "../components/yesCheckbox";
-import RegularButton from "../components/regularButton";
-import SecondaryButton from "../components/secondaryButton";
-import PrimaryButton from "../components/primaryButton";
+import ProgressBar from "../../components/progressBar";
+import RegularButton from "../../components/regularButton";
+import SecondaryButton from "../../components/secondaryButton";
+import PrimaryButton from "../../components/primaryButton";
+import AccidentStatusCar from "../../components/accidentStatusCar";
+import ButtonYes from "../../components/buttonYes";
+import ButtonNo from "../../components/buttonNo";
 
-import AccidentStatusCar from "../components/accidentStatusCar";
-import ButtonYes from "../components/buttonYes";
-import ButtonNo from "../components/buttonNo";
-import TakePhoto from "../components/takePhoto";
-import { Link } from "react-router-dom";
-
-export default function AccidentStatusPage() {
+export default function AccidentStatusPage({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
   const [isAccidentFree, setIsAccidentFree] = useState(null);
@@ -191,18 +182,8 @@ export default function AccidentStatusPage() {
 
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinepaintinspection">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinedentsscuffsdamages">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Save and Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

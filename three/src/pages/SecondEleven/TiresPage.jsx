@@ -2,18 +2,14 @@ import RegularButton from "../../components/regularButton";
 import { Disclosure, DisclosurePanel } from "@headlessui/react";
 import { AnimatePresence, motion } from "motion/react";
 import { Fragment, useState } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
 import TireThreadDepthCar from "../../components/tireTreadDepthCar";
-import YesCheckbox from "../../components/yesCheckbox";
-import NoCheckbox from "../../components/noCheckbox";
 import ProgressBar from "../../components/progressBar";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
-import { Link } from "react-router-dom";
 
-export default function TiresPage() {
+export default function TiresPage({ onBack, onNext }) {
   const [summerTires, setSummerTires] = useState(false);
   const [winterTires, setWinterTires] = useState(false);
   const [allSeasonTires, setAllSeasonTires] = useState(false);
@@ -417,18 +413,8 @@ export default function TiresPage() {
         </Disclosure>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinevin">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlineadditionalequipment">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Save and Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

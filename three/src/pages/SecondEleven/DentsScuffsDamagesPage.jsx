@@ -1,18 +1,14 @@
 import { useState, Fragment } from "react";
-import ButtonYes from "../components/buttonYes";
-import ButtonNo from "../components/buttonNo";
-import RegularButton from "../components/regularButton";
-import ProgressBar from "../components/progressBar";
-import PaintDepthCar from "../components/paintDepthCar";
+import ButtonYes from "../../components/buttonYes";
+import ButtonNo from "../../components/buttonNo";
+import ProgressBar from "../../components/progressBar";
 import { Disclosure, DisclosurePanel } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import SecondaryButton from "../components/secondaryButton";
-import PrimaryButton from "../components/primaryButton";
-import TakePhoto from "../components/takePhoto";
-import DentsScuffsDamagesCar from "../components/dentsScuffsDamagesCar";
-import { Link } from "react-router-dom";
+import SecondaryButton from "../../components/secondaryButton";
+import PrimaryButton from "../../components/primaryButton";
+import DentsScuffsDamagesCar from "../../components/dentsScuffsDamagesCar";
 
-export default function DentsScuffsDamagesPage() {
+export default function DentsScuffsDamagesPage({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
   const [isDamaged, setIsDamaged] = useState(null);
@@ -134,18 +130,8 @@ export default function DentsScuffsDamagesPage() {
 
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlineaccidentstatus">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinevin">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Save and Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

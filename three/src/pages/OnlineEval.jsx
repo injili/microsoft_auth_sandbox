@@ -6,6 +6,12 @@ import AccidentStatusPage from "./SecondEleven/AccidentStatusPage";
 import DentsScuffsDamagesPage from "./SecondEleven/DentsScuffsDamagesPage";
 import VehicleIdentificationNumber from "./SecondEleven/VehicleIdentificationNumber";
 import TiresPage from "./SecondEleven/TiresPage";
+import AdditionalEquipment from "./SecondEleven/AdditionalEquipment";
+import InspectionData from "./SecondEleven/InspectionData";
+import Warranty from "./SecondEleven/Warranty";
+import Financing from "./SecondEleven/Financing";
+import AddressCustomeData from "./SecondEleven/AddressCustomerData";
+import CustomerFinalPrice from "./SecondEleven/CustomerFinalPrice";
 
 export default function OnlineEval() {
   const [searchParams] = useSearchParams();
@@ -17,10 +23,12 @@ export default function OnlineEval() {
     if (step < 12) return setStep(step + 1);
     else return navigate("/onlinesummary");
   };
+
   const handleBack = () => {
     if (step > 1) return setStep(step - 1);
     else return navigate("/onlinesummary");
   };
+
   return (
     <div className="flex w-full items-center justify-center">
       {step === 1 && <PreviousOwners onNext={handleNext} onBack={handleBack} />}

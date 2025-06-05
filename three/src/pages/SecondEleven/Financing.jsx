@@ -4,9 +4,8 @@ import SecondaryButton from "../../components/secondaryButton";
 import PrimaryButton from "../../components/primaryButton";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
-import { Link } from "react-router-dom";
 
-export default function Financing() {
+export default function Financing({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
 
@@ -43,18 +42,8 @@ export default function Financing() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinewarranty">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlineaddresscustomerdata">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Save and Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

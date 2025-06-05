@@ -3,7 +3,7 @@ import { FaPlus } from "react-icons/fa";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function AdditionalEquipment() {
+export default function AdditionalEquipment({ onBack, onNext }) {
   const types = [
     { label: "Trailer Hitch" },
     { label: "Partition" },
@@ -40,18 +40,8 @@ export default function AdditionalEquipment() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinetires">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlineinspectiondata">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>
         </div>
       </div>
