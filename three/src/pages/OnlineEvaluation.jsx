@@ -17,7 +17,9 @@ import CustomerPhoneNumber from "./FirstEleven/CustomerPhoneNumber";
 export default function OnlineEvaluation() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const initialStep = parseInt(searchParams.get("step")) || 1;
+  const stepParam = searchParams.get("step");
+  const hasStep = stepParam !== null;
+  const initialStep = parseInt(stepParam) || 1;
   const [step, setStep] = useState(initialStep);
 
   const handleNext = () => {
@@ -31,25 +33,69 @@ export default function OnlineEvaluation() {
 
   return (
     <div className="w-full flex items-center justify-center">
-      {step === 1 && <Manufacturer onNext={handleNext} onBack={handleBack} />}
-      {step === 2 && <Model onNext={handleNext} onBack={handleBack} />}
-      {step === 3 && <VehicleType onNext={handleNext} onBack={handleBack} />}
+      {step === 1 && (
+        <Manufacturer
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
+      )}
+      {step === 2 && (
+        <Model onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+      )}
+      {step === 3 && (
+        <VehicleType
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
+      )}
       {step === 4 && (
-        <FirstRegistration onNext={handleNext} onBack={handleBack} />
+        <FirstRegistration
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
       )}
-      {step === 5 && <Mileage onNext={handleNext} onBack={handleBack} />}
+      {step === 5 && (
+        <Mileage onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+      )}
       {step === 6 && (
-        <EngineSpecification onNext={handleNext} onBack={handleBack} />
+        <EngineSpecification
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
       )}
-      {step === 7 && <FuelType onNext={handleNext} onBack={handleBack} />}
-      {step === 8 && <Transmission onNext={handleNext} onBack={handleBack} />}
-      {step === 9 && <Drive onNext={handleNext} onBack={handleBack} />}
-      {step === 10 && <Color onNext={handleNext} onBack={handleBack} />}
+      {step === 7 && (
+        <FuelType onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+      )}
+      {step === 8 && (
+        <Transmission
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
+      )}
+      {step === 9 && (
+        <Drive onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+      )}
+      {step === 10 && (
+        <Color onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+      )}
       {step === 11 && (
-        <PriceAsAdvertised onNext={handleNext} onBack={handleBack} />
+        <PriceAsAdvertised
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
       )}
       {step === 12 && (
-        <CustomerPhoneNumber onNext={handleNext} onBack={handleBack} />
+        <CustomerPhoneNumber
+          onNext={handleNext}
+          onBack={handleBack}
+          hasStep={hasStep}
+        />
       )}
     </div>
   );

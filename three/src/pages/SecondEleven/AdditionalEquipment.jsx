@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
@@ -32,6 +33,9 @@ export default function AdditionalEquipment() {
                 {option.label}
               </RegularButton>
             ))}
+            <RegularButton>
+              <FaPlus className="text-xl" />
+            </RegularButton>
           </div>
         </div>
         <div className="w-full flex mt-4 justify-end">

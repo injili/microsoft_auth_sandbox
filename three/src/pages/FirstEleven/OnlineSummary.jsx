@@ -50,7 +50,7 @@ export default function OnlineSummary() {
                 Back
               </SecondaryButton>
             </Link>
-            <Link to="/onlinepreviousowners">
+            <Link to="/onlineeval">
               <PrimaryButton onClick={() => console.log("Next step")}>
                 Continue
               </PrimaryButton>

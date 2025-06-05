@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function Drive({ onBack, onNext }) {
+import TertiaryButton from "../../components/tertiaryButton";
+
+export default function Drive({ onBack, onNext, hasStep }) {
+  const navigate = useNavigate();
   const types = [
     { label: "Front-wheel" },
     { label: "Rear-wheel" },
@@ -37,6 +41,11 @@ export default function Drive({ onBack, onNext }) {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
+            {hasStep && (
+              <TertiaryButton onClick={() => navigate("/onlinesummary")}>
+                Go to Summary
+              </TertiaryButton>
+            )}
             <SecondaryButton onClick={onBack}>Back</SecondaryButton>
             <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>

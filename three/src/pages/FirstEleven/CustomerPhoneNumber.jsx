@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
+import TertiaryButton from "../../components/tertiaryButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function CustomerPhoneNumber({ onBack, onNext }) {
+
+export default function CustomerPhoneNumber({ onBack, onNext, hasStep }) {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
@@ -19,6 +23,11 @@ export default function CustomerPhoneNumber({ onBack, onNext }) {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
+            {hasStep && (
+              <TertiaryButton onClick={() => navigate("/onlinesummary")}>
+                Go to Summary
+              </TertiaryButton>
+            )}
             <SecondaryButton onClick={onBack}>Back</SecondaryButton>
             <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>

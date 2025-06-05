@@ -1,9 +1,8 @@
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 import RegularButton from "../../components/regularButton";
-import { Link } from "react-router-dom";
 
-export default function PreviousOwners() {
+export default function PreviousOwners({ onBack, onNext }) {
   const types = [
     { label: "Private" },
     { label: "Commercial" },
@@ -53,18 +52,8 @@ export default function PreviousOwners() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinesummary">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinepaintinspection">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Save and Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

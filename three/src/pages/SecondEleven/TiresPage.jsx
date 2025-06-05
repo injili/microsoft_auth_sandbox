@@ -1,16 +1,16 @@
-import RegularButton from "../components/regularButton";
+import RegularButton from "../../components/regularButton";
 import { Disclosure, DisclosurePanel } from "@headlessui/react";
 import { AnimatePresence, motion } from "motion/react";
 import { Fragment, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
-import TireThreadDepthCar from "../components/tireTreadDepthCar";
-import YesCheckbox from "../components/yesCheckbox";
-import NoCheckbox from "../components/noCheckbox";
-import ProgressBar from "../components/progressBar";
-import ButtonYes from "../components/buttonYes";
-import ButtonNo from "../components/buttonNo";
-import PrimaryButton from "../components/primaryButton";
-import SecondaryButton from "../components/secondaryButton";
+import TireThreadDepthCar from "../../components/tireTreadDepthCar";
+import YesCheckbox from "../../components/yesCheckbox";
+import NoCheckbox from "../../components/noCheckbox";
+import ProgressBar from "../../components/progressBar";
+import ButtonYes from "../../components/buttonYes";
+import ButtonNo from "../../components/buttonNo";
+import PrimaryButton from "../../components/primaryButton";
+import SecondaryButton from "../../components/secondaryButton";
 import { Link } from "react-router-dom";
 
 export default function TiresPage() {

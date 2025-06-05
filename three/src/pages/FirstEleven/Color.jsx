@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function Color({ onBack, onNext }) {
+import TertiaryButton from "../../components/tertiaryButton";
+import { FaPlus } from "react-icons/fa";
+export default function Color({ onBack, onNext, hasStep }) {
+  const navigate = useNavigate();
   const types = [
     { label: "Blue" },
     { label: "Red" },
@@ -36,10 +40,18 @@ export default function Color({ onBack, onNext }) {
                 {option.label}
               </RegularButton>
             ))}
+            <RegularButton>
+              <FaPlus className="text-xl" />
+            </RegularButton>
           </div>
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
+            {hasStep && (
+              <TertiaryButton onClick={() => navigate("/onlinesummary")}>
+                Go to Summary
+              </TertiaryButton>
+            )}
             <SecondaryButton onClick={onBack}>Back</SecondaryButton>
             <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>
