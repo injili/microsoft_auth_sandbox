@@ -41,7 +41,7 @@ export default function AdditionalEquipment({ onBack, onNext }) {
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
             <SecondaryButton onClick={onBack}>Back</SecondaryButton>
-            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
+            <PrimaryButton onClick={onNext}>Save and Continue</PrimaryButton>
           </div>
         </div>
       </div>

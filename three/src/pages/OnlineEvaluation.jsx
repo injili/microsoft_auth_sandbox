@@ -13,6 +13,7 @@ import Color from "./FirstEleven/Color";
 import PriceAsAdvertised from "./FirstEleven/PriceAsAdvertised";
 import { useNavigate } from "react-router-dom";
 import CustomerPhoneNumber from "./FirstEleven/CustomerPhoneNumber";
+import ProgressBar from "../components/progressBar";
 
 export default function OnlineEvaluation() {
   const [searchParams] = useSearchParams();
@@ -32,7 +33,7 @@ export default function OnlineEvaluation() {
   };
 
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center">
       {step === 1 && (
         <Manufacturer
           onNext={handleNext}
@@ -97,6 +98,7 @@ export default function OnlineEvaluation() {
           hasStep={hasStep}
         />
       )}
+      <ProgressBar progress={Math.round(((step - 1) / 12) * 100)} />
     </div>
   );
 }

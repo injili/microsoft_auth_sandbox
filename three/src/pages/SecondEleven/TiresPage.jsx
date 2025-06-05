@@ -418,7 +418,6 @@ export default function TiresPage({ onBack, onNext }) {
           </div>
         </div>
       </div>
-      <ProgressBar progress={36} />
     </div>
   );
 }

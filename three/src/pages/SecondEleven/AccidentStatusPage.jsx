@@ -187,7 +187,6 @@ export default function AccidentStatusPage({ onBack, onNext }) {
           </div>
         </div>
       </div>
-      <ProgressBar progress={9} />
     </div>
   );
 }

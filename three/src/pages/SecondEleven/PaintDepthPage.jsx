@@ -89,8 +89,6 @@ export default function PaintDepthPage({ onBack, onNext }) {
           </div>
         </div>
       </div>
-
-      <ProgressBar progress={4} />
     </div>
   );
 }

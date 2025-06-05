@@ -135,8 +135,6 @@ export default function DentsScuffsDamagesPage({ onBack, onNext }) {
           </div>
         </div>
       </div>
-
-      <ProgressBar progress={18} />
     </div>
   );
 }

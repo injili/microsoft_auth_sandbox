@@ -1,6 +1,6 @@
 export default function ProgressBar({ progress }) {
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-1 mt-6 lg:max-w-5/8 min-w-7/8">
       <div className="text-black text-sm ">{progress}% Complete</div>
       <div className="w-full bg-[#2154A2]/30 rounded-sm h-2">
         <div

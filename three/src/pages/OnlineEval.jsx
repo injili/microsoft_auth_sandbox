@@ -12,6 +12,7 @@ import Warranty from "./SecondEleven/Warranty";
 import Financing from "./SecondEleven/Financing";
 import AddressCustomeData from "./SecondEleven/AddressCustomerData";
 import CustomerFinalPrice from "./SecondEleven/CustomerFinalPrice";
+import ProgressBar from "../components/progressBar";
 
 export default function OnlineEval() {
   const [searchParams] = useSearchParams();
@@ -30,7 +31,7 @@ export default function OnlineEval() {
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex flex-col w-full items-center justify-center">
       {step === 1 && <PreviousOwners onNext={handleNext} onBack={handleBack} />}
       {step === 2 && <PaintDepthPage onNext={handleNext} onBack={handleBack} />}
       {step === 3 && (
@@ -55,6 +56,7 @@ export default function OnlineEval() {
       {step === 12 && (
         <CustomerFinalPrice onNext={handleNext} onBack={handleBack} />
       )}
+      <ProgressBar progress={Math.round(((step - 1) / 12) * 100)} />
     </div>
   );
 }
