@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function FuelType() {
+export default function FuelType({ onBack, onNext }) {
   const types = [
     { label: "Petrol" },
     { label: "Diesel" },
@@ -39,18 +38,8 @@ export default function FuelType() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlineenginespecification">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinetransmission">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

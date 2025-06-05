@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function Drive() {
+export default function Drive({ onBack, onNext }) {
   const types = [
     { label: "Front-wheel" },
     { label: "Rear-wheel" },
@@ -38,18 +37,8 @@ export default function Drive() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinetransmission">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinecolor">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

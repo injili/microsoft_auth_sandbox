@@ -29,6 +29,7 @@ import CustomerFinalPrice from "./pages/SecondEleven/CustomerFinalPrice";
 import Navigation from "./components/navigation";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Footer from "./components/footer";
+import OnlineEvaluation from "./pages/OnlineEvaluation";
 
 const Layout = () => {
   return (
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <PasteLink />,
+      },
+      {
+        path: "/onlineevaluation",
+        element: <OnlineEvaluation />,
       },
       {
         path: "/fillform",

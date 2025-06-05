@@ -18,7 +18,7 @@ export default function PasteLink() {
         ></input>
         <p className="font-montserrat mt-2 font-medium">
           or
-          <Link to="/onlinemanufacturer" className="ml-1">
+          <Link to="/onlineevaluation" className="ml-1">
             <span className="text-primary underline text-lg">
               Manually Fill Form
             </span>

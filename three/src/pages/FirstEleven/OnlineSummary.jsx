@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 import { MdOutlineModeEdit } from "react-icons/md";
@@ -27,20 +27,23 @@ export default function OnlineSummary() {
 
       <div className="bg-white rounded-sm flex flex-col gap-4 p-8 justify-center">
         {summary.map((option, index) => (
-          <div
-            className="flex justify-between min-w-9/12 max-w-9/12"
-            key={index}
-          >
-            <p className="font-montserrat font-medium">{option.label}</p>
-            <p className="px-2 font-montserrat font-medium text-primary">
+          <div className="flex min-w-9/12" key={index}>
+            <p className="font-montserrat font-medium min-w-96">
+              {option.label}
+            </p>
+            <p className="px-2 font-montserrat font-medium text-primary min-w-96">
               {option.value}
             </p>
-            <MdOutlineModeEdit className="text-2xl text-primary" />
+            <div className="flex w-full justify-end">
+              <Link to={`/onlineevaluation?step=${index + 1}`}>
+                <MdOutlineModeEdit className=" hover:text-black text-2xl text-primary" />
+              </Link>
+            </div>
           </div>
         ))}
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/fillform">
+            <Link to="/onlineevaluation?step=12">
               <SecondaryButton
                 onClick={() => console.log("Back to previous page")}
               >

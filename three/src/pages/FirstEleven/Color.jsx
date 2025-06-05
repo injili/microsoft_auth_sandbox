@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function Color() {
+export default function Color({ onBack, onNext }) {
   const types = [
     { label: "Blue" },
     { label: "Red" },
@@ -41,18 +40,8 @@ export default function Color() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinedrive">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinepriceasadvertised">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

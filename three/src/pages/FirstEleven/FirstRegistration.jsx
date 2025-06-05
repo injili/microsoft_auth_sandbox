@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
-export default function FirstRegistration() {
+export default function FirstRegistration({ onBack, onNext }) {
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
@@ -28,18 +27,8 @@ export default function FirstRegistration() {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlinevehicletype">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
-            <Link to="/onlinemileage">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Continue
-              </PrimaryButton>
-            </Link>
+            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
+            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
           </div>
         </div>
       </div>
