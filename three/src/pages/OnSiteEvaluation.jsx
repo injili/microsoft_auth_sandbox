@@ -4,6 +4,7 @@ import FetchedData from "./OnSiteEvaluation/FetchedData";
 import RegistrationDocument from "./OnSiteEvaluation/RegistrationDocument";
 import Transmission from "./OnSiteEvaluation/Transmission";
 import Drive from "./OnSiteEvaluation/Drive";
+import Type from "./OnSiteEvaluation/Type";
 
 export default function OnSiteEvaluation() {
   const [searchParams] = useSearchParams();
@@ -27,6 +28,7 @@ export default function OnSiteEvaluation() {
       )}
       {step === 3 && <Transmission onNext={handleNext} onBack={handleBack} />}
       {step === 4 && <Drive onNext={handleNext} onBack={handleBack} />}
+      {step === 5 && <Type onNext={handleNext} onBack={handleBack} />}
     </div>
   );
 }

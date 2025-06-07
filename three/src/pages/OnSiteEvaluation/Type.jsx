@@ -7,14 +7,14 @@ import RegularButton from "../../components/regularButton";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
 
-export default function Drive({ onBack, onNext }) {
+export default function Type({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
-  const [selectedDrive, setSelectedDrive] = useState(null);
   const [isFalse, setIsFalse] = useState(false);
+  const [selectType, setSelectType] = useState(null);
 
-  const handleDrive = (type) => {
-    setSelectedDrive((prev) => (prev === type ? null : type));
+  const handleType = (type) => {
+    setSelectType((prev) => (prev === type ? null : type));
   };
 
   const handleClickYes = () => {
@@ -42,11 +42,11 @@ export default function Drive({ onBack, onNext }) {
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
-          Drive
+          Type
         </h2>
         <p className="font-montserrat font-bold">
           Previously Recorded Data:
-          <span className="ml-4 text-lg text-primary">All-Wheel</span>
+          <span className="ml-4 text-lg text-primary">SUV</span>
         </p>
       </div>
 
@@ -82,35 +82,47 @@ export default function Drive({ onBack, onNext }) {
                   >
                     <div className="flex flex-col gap-2">
                       <p className="font-montserrat font-medium">
-                        What kind of accident damage is present?
+                        Does the type match the previously recorded data?
                       </p>
-                      <div className="flex lg:max-w-1/2 flex-wrap gap-4">
+                      <div className="flex flex-wrap gap-4">
                         <RegularButton
-                          onClick={() => handleDrive("front")}
-                          showIcon={selectedDrive === "front"}
+                          onClick={() => handleType("convertible")}
+                          showIcon={selectType === "convertible"}
                         >
-                          Front-Wheel
+                          Convertible
                         </RegularButton>
 
                         <RegularButton
-                          onClick={() => handleDrive("rear")}
-                          showIcon={selectedDrive === "rear"}
+                          onClick={() => handleType("suv")}
+                          showIcon={selectType === "suv"}
                         >
-                          Rear-Wheel
+                          SUV
                         </RegularButton>
 
                         <RegularButton
-                          onClick={() => handleDrive("all")}
-                          showIcon={selectedDrive === "all"}
+                          onClick={() => handleType("stationwagon")}
+                          showIcon={selectType === "stationwagon"}
                         >
-                          All-Wheel
+                          Station Wagon
                         </RegularButton>
 
                         <RegularButton
-                          onClick={() => handleDrive("four")}
-                          showIcon={selectedDrive === "four"}
+                          onClick={() => handleType("smallcar")}
+                          showIcon={selectType === "smallcar"}
                         >
-                          Four-Wheel
+                          Small Car
+                        </RegularButton>
+                        <RegularButton
+                          onClick={() => handleType("van")}
+                          showIcon={selectType === "van"}
+                        >
+                          Van/ Minibus
+                        </RegularButton>
+                        <RegularButton
+                          onClick={() => handleType("sportscar")}
+                          showIcon={selectType === "sportscar"}
+                        >
+                          Sports Car
                         </RegularButton>
                       </div>
                     </div>
