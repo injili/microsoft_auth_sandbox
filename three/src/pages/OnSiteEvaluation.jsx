@@ -3,6 +3,7 @@ import { useState } from "react";
 import FetchedData from "./OnSiteEvaluation/FetchedData";
 import RegistrationDocument from "./OnSiteEvaluation/RegistrationDocument";
 import Transmission from "./OnSiteEvaluation/Transmission";
+import Drive from "./OnSiteEvaluation/Drive";
 
 export default function OnSiteEvaluation() {
   const [searchParams] = useSearchParams();
@@ -25,6 +26,7 @@ export default function OnSiteEvaluation() {
         <RegistrationDocument onNext={handleNext} onBack={handleBack} />
       )}
       {step === 3 && <Transmission onNext={handleNext} onBack={handleBack} />}
+      {step === 4 && <Drive onNext={handleNext} onBack={handleBack} />}
     </div>
   );
 }
