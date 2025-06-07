@@ -2,6 +2,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import FetchedData from "./OnSiteEvaluation/FetchedData";
 import RegistrationDocument from "./OnSiteEvaluation/RegistrationDocument";
+import Transmission from "./OnSiteEvaluation/Transmission";
 
 export default function OnSiteEvaluation() {
   const [searchParams] = useSearchParams();
@@ -23,6 +24,7 @@ export default function OnSiteEvaluation() {
       {step === 2 && (
         <RegistrationDocument onNext={handleNext} onBack={handleBack} />
       )}
+      {step === 3 && <Transmission onNext={handleNext} onBack={handleBack} />}
     </div>
   );
 }
