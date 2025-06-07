@@ -5,6 +5,7 @@ import RegistrationDocument from "./OnSiteEvaluation/RegistrationDocument";
 import Transmission from "./OnSiteEvaluation/Transmission";
 import Drive from "./OnSiteEvaluation/Drive";
 import Type from "./OnSiteEvaluation/Type";
+import PreviousOwners from "./OnSiteEvaluation/PreviousOwners";
 
 export default function OnSiteEvaluation() {
   const [searchParams] = useSearchParams();
@@ -29,6 +30,7 @@ export default function OnSiteEvaluation() {
       {step === 3 && <Transmission onNext={handleNext} onBack={handleBack} />}
       {step === 4 && <Drive onNext={handleNext} onBack={handleBack} />}
       {step === 5 && <Type onNext={handleNext} onBack={handleBack} />}
+      {step === 6 && <PreviousOwners onNext={handleNext} onBack={handleBack} />}
     </div>
   );
 }
