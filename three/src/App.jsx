@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Footer from "./components/footer";
 import OnlineEvaluation from "./pages/OnlineEvaluation";
 import OnlineEval from "./pages/OnlineEval";
+import OnSiteEvaluation from "./pages/OnSiteEvaluation";
 
 const Layout = () => {
   return (
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/onlinesummary",
         element: <OnlineSummary />,
+      },
+      {
+        path: "/onsiteevaluation",
+        element: <OnSiteEvaluation />,
       },
     ],
   },
