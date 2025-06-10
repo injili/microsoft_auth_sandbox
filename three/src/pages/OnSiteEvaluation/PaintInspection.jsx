@@ -6,31 +6,12 @@ import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
+import PaintDepthCar from "../../components/paintDepthCar";
 
-export default function Transmission({ onBack, onNext }) {
+export default function PaintInspection({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
-  const [manualClick, setManualClick] = useState(false);
-  const [autoClick, setAutoClick] = useState(false);
   const [isFalse, setIsFalse] = useState(false);
-
-  const handleManual = () => {
-    if (manualClick) {
-      setManualClick(false);
-    } else {
-      setManualClick(true);
-      setAutoClick(false);
-    }
-  };
-
-  const handleAuto = () => {
-    if (autoClick) {
-      setAutoClick(false);
-    } else {
-      setAutoClick(true);
-      setManualClick(false);
-    }
-  };
 
   const handleClickYes = () => {
     if (clickYes) {
@@ -57,17 +38,17 @@ export default function Transmission({ onBack, onNext }) {
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
-          Transmission
+          Paint Inspection
         </h2>
         <p className="font-montserrat font-bold">
-          Previously Recorded Data:
-          <span className="ml-4 text-lg text-primary">Manual</span>
+          Previously Recorded: Does the vehicle have repainted parts
+          <span className="ml-4 text-lg text-primary">No</span>
         </p>
       </div>
 
       <div className="bg-white rounded-sm p-8 items-center justify-center">
         <p className="font-montserrat font-medium">
-          Do the transmission details match the previously recorded data?
+          Was it indicated that the vehicle is accident-free?
         </p>
         <div className="flex py-2 gap-4">
           <ButtonYes onClick={handleClickYes} showIcon={clickYes} />
@@ -95,25 +76,7 @@ export default function Transmission({ onBack, onNext }) {
                     }}
                     className="origin-top"
                   >
-                    <div className="flex flex-col gap-2">
-                      <p className="font-montserrat font-medium">
-                        What is the actual transmission of the vehicle?
-                      </p>
-                      <div className="flex gap-4">
-                        <RegularButton
-                          onClick={handleManual}
-                          showIcon={manualClick}
-                        >
-                          Manual
-                        </RegularButton>
-                        <RegularButton
-                          onClick={handleAuto}
-                          showIcon={autoClick}
-                        >
-                          Automatic
-                        </RegularButton>
-                      </div>
-                    </div>
+                    <PaintDepthCar />
                   </motion.div>
                 </DisclosurePanel>
               )}
