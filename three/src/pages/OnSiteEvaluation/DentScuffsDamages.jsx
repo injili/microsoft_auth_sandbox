@@ -3,35 +3,14 @@ import { Disclosure, DisclosurePanel } from "@headlessui/react";
 import { AnimatePresence, motion } from "motion/react";
 import SecondaryButton from "../../components/secondaryButton";
 import PrimaryButton from "../../components/primaryButton";
-import RegularButton from "../../components/regularButton";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
-import AccidentStatusCar from "../../components/accidentStatusCar";
+import DentsScuffsDamagesCar from "../../components/dentsScuffsDamagesCar";
 
-export default function AccidentStatus({ onBack, onNext }) {
+export default function DentsScuffsDamages({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
-  const [manualClick, setCurrentClick] = useState(false);
-  const [repairedClick, setRepairedClick] = useState(false);
   const [isFalse, setIsFalse] = useState(false);
-
-  const handleCurrent = () => {
-    if (manualClick) {
-      setCurrentClick(false);
-    } else {
-      setCurrentClick(true);
-      setRepairedClick(false);
-    }
-  };
-
-  const handleRepaired = () => {
-    if (repairedClick) {
-      setRepairedClick(false);
-    } else {
-      setRepairedClick(true);
-      setCurrentClick(false);
-    }
-  };
 
   const handleClickYes = () => {
     if (clickYes) {
@@ -58,17 +37,43 @@ export default function AccidentStatus({ onBack, onNext }) {
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
-          Accident Status
+          Dents Scuffs and Damages
         </h2>
-        <p className="font-montserrat font-bold">
-          Previously Recorded Data: Is the vehicle accident free?
-          <span className="ml-4 text-lg text-primary">Yes</span>
-        </p>
       </div>
 
       <div className="bg-white rounded-sm p-8 items-center justify-center">
+        <p className="font-montserrat font-bold">
+          Here are the previously recorded Dents, Scuffs and Damages. Tap on
+          each “X” to get more information on the damage.
+        </p>
+        <DentsScuffsDamagesCar />
+        <div className="flex flex-col gap-2 mb-4">
+          <p className="font-montserrat font-bold">Key</p>
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 20 20" width="15" height="15" fill="blue">
+              <path d="M12.688.479 8.142 5.013 3.596.479a1.431 1.431 0 0 0-2.02 0L.566 1.486a1.423 1.423 0 0 0 0 2.015l4.546 4.535L.566 12.57a1.423 1.423 0 0 0 0 2.015l1.01 1.008a1.431 1.431 0 0 0 2.02 0l4.546-4.535 4.546 4.535a1.431 1.431 0 0 0 2.02 0l1.01-1.008a1.423 1.423 0 0 0 0-2.015l-4.545-4.534L15.718 3.5a1.423 1.423 0 0 0 0-2.015L14.708.48a1.431 1.431 0 0 0-2.02 0Z" />
+            </svg>
+
+            <p className="font-montserrat font-medium text-sm">- Scratch</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 20 20" width="15" height="15" fill="red">
+              <path d="M12.688.479 8.142 5.013 3.596.479a1.431 1.431 0 0 0-2.02 0L.566 1.486a1.423 1.423 0 0 0 0 2.015l4.546 4.535L.566 12.57a1.423 1.423 0 0 0 0 2.015l1.01 1.008a1.431 1.431 0 0 0 2.02 0l4.546-4.535 4.546 4.535a1.431 1.431 0 0 0 2.02 0l1.01-1.008a1.423 1.423 0 0 0 0-2.015l-4.545-4.534L15.718 3.5a1.423 1.423 0 0 0 0-2.015L14.708.48a1.431 1.431 0 0 0-2.02 0Z" />
+            </svg>
+
+            <p className="font-montserrat font-medium text-sm">- Dent</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 20 20" width="15" height="15" fill="yellow">
+              <path d="M12.688.479 8.142 5.013 3.596.479a1.431 1.431 0 0 0-2.02 0L.566 1.486a1.423 1.423 0 0 0 0 2.015l4.546 4.535L.566 12.57a1.423 1.423 0 0 0 0 2.015l1.01 1.008a1.431 1.431 0 0 0 2.02 0l4.546-4.535 4.546 4.535a1.431 1.431 0 0 0 2.02 0l1.01-1.008a1.423 1.423 0 0 0 0-2.015l-4.545-4.534L15.718 3.5a1.423 1.423 0 0 0 0-2.015L14.708.48a1.431 1.431 0 0 0-2.02 0Z" />
+            </svg>
+
+            <p className="font-montserrat font-medium text-sm">- Scuff</p>
+          </div>
+        </div>
         <p className="font-montserrat font-medium">
-          Is the vehicle accident free?
+          Do the details regarding dents and scratches correspond to the actual
+          observations?
         </p>
         <div className="flex py-2 gap-4">
           <ButtonYes onClick={handleClickYes} showIcon={clickYes} />
@@ -98,45 +103,10 @@ export default function AccidentStatus({ onBack, onNext }) {
                   >
                     <div className="flex flex-col gap-2">
                       <p className="font-montserrat font-medium">
-                        What kind of accident damage is present?
+                        Mark the damaged areas on the diagram below by tapping
+                        the damaged sections till they are all recorded.
                       </p>
-                      <div className="flex gap-4">
-                        <RegularButton
-                          onClick={handleCurrent}
-                          showIcon={manualClick}
-                        >
-                          Current Damage
-                        </RegularButton>
-                        <RegularButton
-                          onClick={handleRepaired}
-                          showIcon={repairedClick}
-                        >
-                          Repaired Damage
-                        </RegularButton>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <p className="font-montserrat font-medium">
-                          Damage Cost
-                        </p>
-                        <div className=" flex items-center gap-2 border-1 max-w-96 px-2 py-1.5 rounded-sm border-[#2154A2] focus-within:border-2 font-montserrat">
-                          <input
-                            type="text"
-                            className="outline-none w-full bg-transparent"
-                          ></input>
-                          <p className="px-2 font-montserrat text-lg font-medium">
-                            €
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <p className="font-montserrat font-medium">
-                          Damaged Parts
-                        </p>
-                        <p className="font-montserrat font-medium text-sm">
-                          Tap on the diagram to give details on the damage
-                        </p>
-                        <AccidentStatusCar />
-                      </div>
+                      <DentsScuffsDamagesCar />
                     </div>
                   </motion.div>
                 </DisclosurePanel>

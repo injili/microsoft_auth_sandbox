@@ -8,6 +8,14 @@ import Type from "./OnSiteEvaluation/Type";
 import PreviousOwners from "./OnSiteEvaluation/PreviousOwners";
 import PaintInspection from "./OnSiteEvaluation/PaintInspection";
 import AccidentStatus from "./OnSiteEvaluation/AccidentStatus";
+import DentsScuffsDamages from "./OnSiteEvaluation/DentScuffsDamages";
+import Tires from "./OnSiteEvaluation/Tires";
+import AdditionalEquipment from "./OnSiteEvaluation/AdditionalEquipment";
+import InspectionData from "./OnSiteEvaluation/InspectionData";
+import Warranty from "./OnSiteEvaluation/Warranty";
+import VisualInspection from "./OnSiteEvaluation/VisualInspection";
+import TestDrive from "./OnSiteEvaluation/TestDrive";
+import PurchaseContract from "./OnSiteEvaluation/PurchaseContract";
 
 export default function OnSiteEvaluation() {
   const [searchParams] = useSearchParams();
@@ -24,7 +32,7 @@ export default function OnSiteEvaluation() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full py-8 flex flex-col items-center justify-center">
       {step === 1 && <FetchedData onNext={handleNext} onBack={handleBack} />}
       {step === 2 && (
         <RegistrationDocument onNext={handleNext} onBack={handleBack} />
@@ -37,6 +45,24 @@ export default function OnSiteEvaluation() {
         <PaintInspection onNext={handleNext} onBack={handleBack} />
       )}
       {step === 8 && <AccidentStatus onNext={handleNext} onBack={handleBack} />}
+      {step === 9 && (
+        <DentsScuffsDamages onNext={handleNext} onBack={handleBack} />
+      )}
+      {step === 10 && <Tires onNext={handleNext} onBack={handleBack} />}
+      {step === 11 && (
+        <AdditionalEquipment onNext={handleNext} onBack={handleBack} />
+      )}
+      {step === 12 && (
+        <InspectionData onNext={handleNext} onBack={handleBack} />
+      )}
+      {step === 13 && <Warranty onNext={handleNext} onBack={handleBack} />}
+      {step === 14 && (
+        <VisualInspection onNext={handleNext} onBack={handleBack} />
+      )}
+      {step === 15 && <TestDrive onNext={handleNext} onBack={handleBack} />}
+      {step === 16 && (
+        <PurchaseContract onNext={handleNext} onBack={handleBack} />
+      )}
     </div>
   );
 }

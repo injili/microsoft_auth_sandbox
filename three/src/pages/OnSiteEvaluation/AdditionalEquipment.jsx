@@ -6,30 +6,35 @@ import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import ButtonYes from "../../components/buttonYes";
 import ButtonNo from "../../components/buttonNo";
-import AccidentStatusCar from "../../components/accidentStatusCar";
+import { FaPlus } from "react-icons/fa";
 
-export default function AccidentStatus({ onBack, onNext }) {
+export default function AdditionalEquipment({ onBack, onNext }) {
   const [clickYes, setClickYes] = useState(false);
   const [clickNo, setClickNo] = useState(false);
-  const [manualClick, setCurrentClick] = useState(false);
-  const [repairedClick, setRepairedClick] = useState(false);
+  const [manualClick, setManualClick] = useState(false);
+  const [autoClick, setAutoClick] = useState(false);
+  const [selectedEquipment, setSelectedEquipment] = useState(null);
   const [isFalse, setIsFalse] = useState(false);
 
-  const handleCurrent = () => {
+  const handleEquipment = (type) => {
+    setSelectedEquipment((prev) => (prev === type ? null : type));
+  };
+
+  const handleManual = () => {
     if (manualClick) {
-      setCurrentClick(false);
+      setManualClick(false);
     } else {
-      setCurrentClick(true);
-      setRepairedClick(false);
+      setManualClick(true);
+      setAutoClick(false);
     }
   };
 
-  const handleRepaired = () => {
-    if (repairedClick) {
-      setRepairedClick(false);
+  const handleAuto = () => {
+    if (autoClick) {
+      setAutoClick(false);
     } else {
-      setRepairedClick(true);
-      setCurrentClick(false);
+      setAutoClick(true);
+      setManualClick(false);
     }
   };
 
@@ -58,17 +63,19 @@ export default function AccidentStatus({ onBack, onNext }) {
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
         <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
-          Accident Status
+          Additional Equipment
         </h2>
         <p className="font-montserrat font-bold">
-          Previously Recorded Data: Is the vehicle accident free?
-          <span className="ml-4 text-lg text-primary">Yes</span>
+          Previously Recorded Data:
+          <span className="ml-4 text-lg text-primary">
+            Bike Rack, Roof Rack
+          </span>
         </p>
       </div>
 
       <div className="bg-white rounded-sm p-8 items-center justify-center">
         <p className="font-montserrat font-medium">
-          Is the vehicle accident free?
+          Do the special features match the entered details?
         </p>
         <div className="flex py-2 gap-4">
           <ButtonYes onClick={handleClickYes} showIcon={clickYes} />
@@ -100,42 +107,37 @@ export default function AccidentStatus({ onBack, onNext }) {
                       <p className="font-montserrat font-medium">
                         What kind of accident damage is present?
                       </p>
-                      <div className="flex gap-4">
+                      <div className="flex flex-wrap gap-4">
                         <RegularButton
-                          onClick={handleCurrent}
-                          showIcon={manualClick}
+                          onClick={() => handleEquipment("trailer")}
+                          showIcon={selectedEquipment === "trailer"}
                         >
-                          Current Damage
+                          Trailer Hitch
                         </RegularButton>
+
                         <RegularButton
-                          onClick={handleRepaired}
-                          showIcon={repairedClick}
+                          onClick={() => handleEquipment("partition")}
+                          showIcon={selectedEquipment === "partition"}
                         >
-                          Repaired Damage
+                          Partition
                         </RegularButton>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <p className="font-montserrat font-medium">
-                          Damage Cost
-                        </p>
-                        <div className=" flex items-center gap-2 border-1 max-w-96 px-2 py-1.5 rounded-sm border-[#2154A2] focus-within:border-2 font-montserrat">
-                          <input
-                            type="text"
-                            className="outline-none w-full bg-transparent"
-                          ></input>
-                          <p className="px-2 font-montserrat text-lg font-medium">
-                            €
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <p className="font-montserrat font-medium">
-                          Damaged Parts
-                        </p>
-                        <p className="font-montserrat font-medium text-sm">
-                          Tap on the diagram to give details on the damage
-                        </p>
-                        <AccidentStatusCar />
+
+                        <RegularButton
+                          onClick={() => handleEquipment("roof")}
+                          showIcon={selectedEquipment === "roof"}
+                        >
+                          Roof Rack
+                        </RegularButton>
+
+                        <RegularButton
+                          onClick={() => handleEquipment("bike")}
+                          showIcon={selectedEquipment === "bike"}
+                        >
+                          Bike Rack
+                        </RegularButton>
+                        <RegularButton>
+                          <FaPlus className="text-xl" />
+                        </RegularButton>
                       </div>
                     </div>
                   </motion.div>
