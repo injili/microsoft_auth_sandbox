@@ -10,6 +10,11 @@ export default function DentsScuffsDamagesCar() {
   const [markers, setMarkers] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeMarker, setActiveMarker] = useState(null);
+  const [selectDamage, setSelectDamage] = useState(null);
+
+  const handleDamage = (type) => {
+    setSelectDamage((prev) => (prev === type ? null : type));
+  };
 
   const svgRef = useRef(null);
   const markerRadius = 10.5;
@@ -105,28 +110,34 @@ export default function DentsScuffsDamagesCar() {
               <div className="flex gap-4">
                 <RegularButton
                   onClick={() => {
-                    activeMarker &&
+                    if (activeMarker) {
+                      handleDamage("dent");
                       setActiveMarker({ ...activeMarker, color: "red" });
+                    }
                   }}
-                  showIcon={false}
+                  showIcon={selectDamage === "dent"}
                 >
                   Dent
                 </RegularButton>
                 <RegularButton
                   onClick={() => {
-                    activeMarker &&
+                    if (activeMarker) {
+                      handleDamage("scuff");
                       setActiveMarker({ ...activeMarker, color: "yellow" });
+                    }
                   }}
-                  showIcon={false}
+                  showIcon={selectDamage === "scuff"}
                 >
                   Scuff
                 </RegularButton>
                 <RegularButton
                   onClick={() => {
-                    activeMarker &&
+                    if (activeMarker) {
+                      handleDamage("scratch");
                       setActiveMarker({ ...activeMarker, color: "blue" });
+                    }
                   }}
-                  showIcon={true}
+                  showIcon={selectDamage === "scratch"}
                 >
                   Scratch
                 </RegularButton>
@@ -135,6 +146,7 @@ export default function DentsScuffsDamagesCar() {
             <div className="flex w-full justify-end gap-4">
               <PrimaryButton
                 onClick={() => {
+                  setSelectDamage(null);
                   handleCloseDialog();
                 }}
               >

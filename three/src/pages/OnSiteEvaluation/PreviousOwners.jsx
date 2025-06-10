@@ -76,7 +76,7 @@ export default function PreviousOwners({ onBack, onNext }) {
 
       <div className="bg-white rounded-sm p-8 items-center justify-center">
         <p className="font-montserrat font-medium">
-          Do the transmission details match the previously recorded data?
+          Does the type of previous owner match the previously recorded data?
         </p>
         <div className="flex py-2 gap-4">
           <ButtonYes onClick={handleYesOwner} showIcon={ownerYes} />

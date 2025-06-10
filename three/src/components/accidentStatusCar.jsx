@@ -11,6 +11,16 @@ export default function AccidentStatusCar() {
   const [isOpen, setIsOpen] = useState(false);
   const [pathColors, setPathColors] = useState({});
   const [currentPath, setCurrentPath] = useState(null);
+  const [selectDamage, setSelectDamage] = useState(null);
+  const [selectReplaced, setSelectReplaced] = useState(null);
+
+  const handleDamage = (type) => {
+    setSelectDamage((prev) => (prev === type ? null : type));
+  };
+
+  const handleReplaced = (type) => {
+    setSelectReplaced((prev) => (prev === type ? null : type));
+  };
 
   const handlePathClick = (pathId) => {
     setActivePaths((prev) => {
@@ -97,15 +107,21 @@ export default function AccidentStatusCar() {
               </p>
               <div className="flex gap-4">
                 <RegularButton
-                  onClick={() => setDamageColor("yellow")}
-                  showIcon={false}
+                  onClick={() => {
+                    handleDamage("minor");
+                    setDamageColor("yellow");
+                  }}
+                  showIcon={selectDamage === "minor"}
                 >
                   Minor Damage
                 </RegularButton>
 
                 <RegularButton
-                  onClick={() => setDamageColor("red")}
-                  showIcon={true}
+                  onClick={() => {
+                    handleDamage("significant");
+                    setDamageColor("red");
+                  }}
+                  showIcon={selectDamage === "significant"}
                 >
                   Significant Damage
                 </RegularButton>
@@ -117,16 +133,34 @@ export default function AccidentStatusCar() {
                 Was the part replaced?
               </p>
               <div className="flex gap-4">
-                <RegularButton onClick={() => setIsOpen(true)} showIcon={true}>
+                <RegularButton
+                  onClick={() => {
+                    handleReplaced("yes");
+                    setIsOpen(true);
+                  }}
+                  showIcon={selectReplaced === "yes"}
+                >
                   Yes
                 </RegularButton>
-                <RegularButton onClick={() => setIsOpen(true)} showIcon={false}>
+                <RegularButton
+                  onClick={() => {
+                    handleReplaced("no");
+                    setIsOpen(true);
+                  }}
+                  showIcon={selectReplaced === "no"}
+                >
                   No
                 </RegularButton>
               </div>
             </div>
             <div className="flex w-full justify-end gap-4">
-              <PrimaryButton onClick={() => setIsOpen(false)}>
+              <PrimaryButton
+                onClick={() => {
+                  setIsOpen(false);
+                  setSelectDamage(null);
+                  setSelectReplaced(null);
+                }}
+              >
                 Submit
               </PrimaryButton>
             </div>

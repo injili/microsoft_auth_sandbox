@@ -16,6 +16,7 @@ import Warranty from "./OnSiteEvaluation/Warranty";
 import VisualInspection from "./OnSiteEvaluation/VisualInspection";
 import TestDrive from "./OnSiteEvaluation/TestDrive";
 import PurchaseContract from "./OnSiteEvaluation/PurchaseContract";
+import SignPurchaseContract from "./OnSiteEvaluation/SignPurchaseContract";
 
 export default function OnSiteEvaluation() {
   const [searchParams] = useSearchParams();
@@ -23,16 +24,16 @@ export default function OnSiteEvaluation() {
   const [step, setStep] = useState(parseInt(searchParams.get("step")) || 1);
 
   const handleNext = () => {
-    if (step < 16) return setStep(step + 1);
-    else return navigate("/onlinesummary");
+    if (step < 17) return setStep(step + 1);
+    else return navigate("/onsiteevaluation");
   };
   const handleBack = () => {
     if (step > 1) return setStep(step - 1);
-    else return navigate("/");
+    else return navigate("/onsiteevaluation");
   };
 
   return (
-    <div className="w-full py-8 flex flex-col items-center justify-center">
+    <div className="w-full min-w-7/8 xl:max-w-7/8 py-8 flex flex-col items-center justify-center">
       {step === 1 && <FetchedData onNext={handleNext} onBack={handleBack} />}
       {step === 2 && (
         <RegistrationDocument onNext={handleNext} onBack={handleBack} />
@@ -62,6 +63,9 @@ export default function OnSiteEvaluation() {
       {step === 15 && <TestDrive onNext={handleNext} onBack={handleBack} />}
       {step === 16 && (
         <PurchaseContract onNext={handleNext} onBack={handleBack} />
+      )}
+      {step === 17 && (
+        <SignPurchaseContract onNext={handleNext} onBack={handleBack} />
       )}
     </div>
   );

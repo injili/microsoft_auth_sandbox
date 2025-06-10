@@ -1,4 +1,4 @@
-import SecondaryButton from "../../components/secondaryButton";
+import SignatureCanvas from "react-signature-canvas";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 
@@ -17,14 +17,17 @@ export default function SignPurchaseContract({ onBack, onNext }) {
         </div>
         <div>
           <p className="font-montserrat font-medium">Sign here</p>
+          <div className="border border-primary rounded-sm">
+            <SignatureCanvas
+              penColor="green"
+              canvasProps={{ width: 700, height: 200, className: "sigCanvas" }}
+            />
+          </div>
         </div>
 
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
-            <PrimaryButton onClick={onNext}>
-              Prepare New Purchase Contract
-            </PrimaryButton>
+            <PrimaryButton onClick={onNext}>Complete Purchase</PrimaryButton>
           </div>
         </div>
       </div>

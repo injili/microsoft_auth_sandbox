@@ -19,7 +19,7 @@ export default function PaintInspection({ onBack, onNext }) {
     } else {
       setClickNo(false);
       setClickYes(true);
-      setIsFalse(false);
+      setIsFalse(true);
     }
   };
 
@@ -30,7 +30,7 @@ export default function PaintInspection({ onBack, onNext }) {
     } else {
       setClickYes(false);
       setClickNo(true);
-      setIsFalse(true);
+      setIsFalse(false);
     }
   };
 
@@ -48,7 +48,7 @@ export default function PaintInspection({ onBack, onNext }) {
 
       <div className="bg-white rounded-sm p-8 items-center justify-center">
         <p className="font-montserrat font-medium">
-          Was it indicated that the vehicle is accident-free?
+          Has the vehicle been repainted?
         </p>
         <div className="flex py-2 gap-4">
           <ButtonYes onClick={handleClickYes} showIcon={clickYes} />
