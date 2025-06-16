@@ -1,5 +1,3 @@
-import PasteLink from "./pages/PasteLink";
-import FirstElevenFormPage from "./pages/FirstElevenFormPage";
 import OnlineSummary from "./pages/FirstEleven/OnlineSummary";
 import Navigation from "./components/navigation";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
@@ -27,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <PasteLink />,
+        element: <OnlineEvaluation />,
       },
       {
         path: "/onlineevaluation",
@@ -36,10 +34,6 @@ const router = createBrowserRouter([
       {
         path: "/onlineeval",
         element: <OnlineEval />,
-      },
-      {
-        path: "/fillform",
-        element: <FirstElevenFormPage />,
       },
       {
         path: "/onlinesummary",

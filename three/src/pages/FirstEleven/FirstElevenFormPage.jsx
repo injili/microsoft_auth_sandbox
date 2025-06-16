@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import PrimaryButton from "../components/primaryButton";
-import SecondaryButton from "../components/secondaryButton";
+import SecondaryButton from "../../components/secondaryButton";
+import PrimaryButton from "../../components/primaryButton";
 
-export default function FirstElevenFormPage() {
+export default function IncompleteFormPage() {
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">

@@ -11,29 +11,31 @@ import Transmission from "./FirstEleven/Transmission";
 import Drive from "./FirstEleven/Drive";
 import Color from "./FirstEleven/Color";
 import PriceAsAdvertised from "./FirstEleven/PriceAsAdvertised";
-import { useNavigate } from "react-router-dom";
 import CustomerPhoneNumber from "./FirstEleven/CustomerPhoneNumber";
 import ProgressBar from "../components/progressBar";
+import PasteLink from "./FirstEleven/PasteLink";
+import OnlineSummary from "./FirstEleven/OnlineSummary";
+import IncompleteFormPage from "./FirstEleven/FirstElevenFormPage";
 
 export default function OnlineEvaluation() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const stepParam = searchParams.get("step");
   const hasStep = stepParam !== null;
-  const initialStep = parseInt(stepParam) || 1;
+  const initialStep = parseInt(stepParam) || 0;
   const [step, setStep] = useState(initialStep);
 
   const handleNext = () => {
-    if (step < 12) return setStep(step + 1);
-    else return navigate("/onlinesummary");
+    if (step < 15) return setStep(step + 1);
+    else return;
   };
   const handleBack = () => {
-    if (step > 1) return setStep(step - 1);
-    else return navigate("/");
+    if (step > 0) return setStep(step - 1);
+    else return;
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full md:w-10/12 lg:w-9/12 flex flex-col items-center justify-center">
+      {step === 0 && <PasteLink onNext={handleNext} />}
       {step === 1 && (
         <Manufacturer
           onNext={handleNext}
@@ -98,7 +100,11 @@ export default function OnlineEvaluation() {
           hasStep={hasStep}
         />
       )}
-      <ProgressBar progress={Math.round(((step - 1) / 12) * 100)} />
+      {step === 13 && <IncompleteFormPage />}
+      {step === 14 && <OnlineSummary />}
+      {step > 0 && step < 13 && (
+        <ProgressBar progress={Math.round(((step - 1) / 12) * 100)} />
+      )}
     </div>
   );
 }
