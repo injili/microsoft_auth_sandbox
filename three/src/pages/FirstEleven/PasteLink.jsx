@@ -1,32 +1,31 @@
 import { useState } from "react";
 import PrimaryButton from "../../components/primaryButton";
-import { useNavigate } from "react-router-dom";
+import isURL from "validator/lib/isURL";
 
 export default function PasteLink({ onNext }) {
   const [theurl, setTheurl] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
-  const navigate = useNavigate();
 
-  const evaluateURL = async () => {
-    const urlRegex =
-      /^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;
-    return urlRegex.test(theurl.trim());
+  const evaluateURL = () => {
+    return isURL(theurl.trim(), {
+      require_protocol: false,
+    });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!theurl) {
       setResponseMessage("Please paste the URL.");
       return;
     }
 
-    if (!evaluateURL()) {
+    if (theurl && !evaluateURL()) {
       setResponseMessage("Invalid URL format");
       return;
     }
 
     setResponseMessage("");
-    navigate("/onlineevaluation?step=14");
+    onNext(14);
   };
 
   return (

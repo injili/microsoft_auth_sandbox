@@ -16,13 +16,23 @@ import ProgressBar from "../components/progressBar";
 import PasteLink from "./FirstEleven/PasteLink";
 import OnlineSummary from "./FirstEleven/OnlineSummary";
 import IncompleteFormPage from "./FirstEleven/FirstElevenFormPage";
+// import axios from "axios";
+// import base64 from "base-64";
+
+// const API_URL = import.meta.env.VITE_API_URL;
+// const TOKEN_URL = import.meta.env.VITE_TOKEN_URL;
+// const CONSUMER_KEY = import.meta.env.VITE_CONSUMER_KEY;
+// const CONSUMER_SECRET = import.meta.env.VITE_CONSUMER_SECRET;
 
 export default function OnlineEvaluation() {
+  // const [responseMessage, setResponseMessage] = useState("");
+  // const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const stepParam = searchParams.get("step");
   const hasStep = stepParam !== null;
   const initialStep = parseInt(stepParam) || 1;
   const [step, setStep] = useState(initialStep);
+  const [carDetails, setCarDetails] = useState({});
   const navigate = useNavigate();
 
   const handleNext = (i) => {
@@ -37,32 +47,84 @@ export default function OnlineEvaluation() {
   };
 
   useEffect(() => {
+    console.log("Updated carDetails:", carDetails);
+  }, [carDetails]);
+
+  useEffect(() => {
     if (step !== initialStep) {
       searchParams.set("step", step);
       navigate(`?${searchParams.toString()}`, { replace: true });
     }
   }, [step]);
 
+  // const getAccessToken = async () => {
+  //   const credentials = base64.encode(`${CONSUMER_KEY}:${CONSUMER_SECRET}`);
+  //   try {
+  //     const response = await axios.get(`${TOKEN_URL}`, {
+  //       headers: {
+  //         Authorization: `Basic ${credentials}`,
+  //       },
+  //     });
+  //     const { access_token } = response.data;
+  //     return access_token;
+  //   } catch (error) {
+  //     console.error("Error fetching access token", error);
+  //     throw error;
+  //   }
+  // };
+
+  // const handleLink = async (l) => {
+  //   setLoading(true);
+  //   try {
+  //     const accessToken = await getAccessToken();
+  //     const headers = {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     };
+
+  //     const data = {
+  //       link: l,
+  //     };
+
+  //     const response = await axios.post(`${API_URL}`, data, { headers });
+
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setResponseMessage(
+  //       "An error occurred while fetching car details request. Please try again"
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   return (
     <div className="min-h-full w-full  flex flex-col items-center justify-center">
       <div></div>
       <div className="px-4 flex-grow flex items-center justify-center w-full md:w-10/12 lg:w-11/12">
+        {/* {step === 1 && <PasteLink onFetch={handleLink} onNext={handleNext} />} */}
         {step === 1 && <PasteLink onNext={handleNext} />}
         {step === 2 && (
           <Manufacturer
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 3 && (
-          <Model onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+          <Model
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
         )}
         {step === 4 && (
           <VehicleType
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 5 && (
