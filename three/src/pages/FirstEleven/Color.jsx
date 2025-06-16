@@ -47,11 +47,11 @@ export default function Color({ onBack, onNext, hasStep }) {
                 {option.label}
               </RegularButton>
             ))}
-            <button onClick={() => setIsOpen(true)}>
+            <div onClick={() => setIsOpen(true)}>
               <RegularButton>
                 <FaPlus className="text-xl" />
               </RegularButton>
-            </button>
+            </div>
           </div>
         </div>
         <div className="w-full flex mt-4 justify-end">
@@ -61,8 +61,8 @@ export default function Color({ onBack, onNext, hasStep }) {
                 Go to Summary
               </TertiaryButton>
             )}
-            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
-            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
+            <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
+            <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

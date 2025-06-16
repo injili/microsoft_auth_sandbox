@@ -28,8 +28,8 @@ export default function CustomerPhoneNumber({ onBack, onNext, hasStep }) {
                 Go to Summary
               </TertiaryButton>
             )}
-            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
-            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
+            <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
+            <PrimaryButton onClick={() => onNext(15)}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

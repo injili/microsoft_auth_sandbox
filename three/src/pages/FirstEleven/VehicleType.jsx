@@ -48,8 +48,8 @@ export default function VehicleType({ onNext, onBack, hasStep }) {
                 Go to Summary
               </TertiaryButton>
             )}
-            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
-            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
+            <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
+            <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

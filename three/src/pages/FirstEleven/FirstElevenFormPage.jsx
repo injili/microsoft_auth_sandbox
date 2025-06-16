@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import SecondaryButton from "../../components/secondaryButton";
 import PrimaryButton from "../../components/primaryButton";
 
-export default function IncompleteFormPage() {
+export default function IncompleteFormPage({ onBack, onNext }) {
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
@@ -78,16 +78,10 @@ export default function IncompleteFormPage() {
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
             <Link to="/">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
+              <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             </Link>
             <Link to="/onlinesummary">
-              <PrimaryButton onClick={() => console.log("Next step")}>
-                Continue
-              </PrimaryButton>
+              <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
             </Link>
           </div>
         </div>

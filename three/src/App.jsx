@@ -1,4 +1,3 @@
-import OnlineSummary from "./pages/FirstEleven/OnlineSummary";
 import Navigation from "./components/navigation";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Footer from "./components/footer";
@@ -8,9 +7,9 @@ import OnSiteEvaluation from "./pages/OnSiteEvaluation";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-[#D6DCE5] via-[#F4F9FF] via-[#F4F4F4] to-[#C7D1DF]">
+    <div className="min-h-screen flex flex-col bg-linear-to-br from-[#D6DCE5] via-[#F4F9FF] via-[#F4F4F4] to-[#C7D1DF]">
       <Navigation />
-      <div className="flex-grow flex flex-col justify-center w-full items-center">
+      <div className="flex-grow flex">
         <Outlet />
       </div>
       <Footer />
@@ -34,10 +33,6 @@ const router = createBrowserRouter([
       {
         path: "/onlineeval",
         element: <OnlineEval />,
-      },
-      {
-        path: "/onlinesummary",
-        element: <OnlineSummary />,
       },
       {
         path: "/onsiteevaluation",

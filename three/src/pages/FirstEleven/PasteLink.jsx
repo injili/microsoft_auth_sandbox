@@ -1,17 +1,16 @@
 import { useState } from "react";
 import PrimaryButton from "../../components/primaryButton";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function PasteLink({ onNext }) {
   const [theurl, setTheurl] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
+  const navigate = useNavigate();
 
   const evaluateURL = async () => {
     const urlRegex =
       /^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;
-    if (theurl && !urlRegex.test(theurl.trim())) {
-      setResponseMessage("Invalid URL format");
-    }
+    return urlRegex.test(theurl.trim());
   };
 
   const handleSubmit = async (e) => {
@@ -20,8 +19,16 @@ export default function PasteLink({ onNext }) {
       setResponseMessage("Please paste the URL.");
       return;
     }
-    await evaluateURL;
+
+    if (!evaluateURL()) {
+      setResponseMessage("Invalid URL format");
+      return;
+    }
+
+    setResponseMessage("");
+    navigate("/onlineevaluation?step=14");
   };
+
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
@@ -36,29 +43,28 @@ export default function PasteLink({ onNext }) {
             * {responseMessage}
           </p>
         )}
-        <input
-          type="text"
-          placeholder="eg. https://suchen.mobile.de/fahrzeuge/details..."
-          className="outline-none w-full border-1 w-full px-2 py-1.5 rounded-sm border-[#2154A2] focus:border-2 font-montserrat"
-          onChange={(e) => setTheurl(e.target.value)}
-        ></input>
-        <p className="font-montserrat mt-2 font-medium">
-          or
-          <button onClick={() => onNext}>
-            <span className="text-primary underline text-lg">
-              Manually Fill Form
-            </span>
-          </button>
-        </p>
-        <div className="w-full flex mt-4 justify-end">
-          <div className="flex gap-4">
-            <Link to={`/onlineevaluation?step=14`}>
-              <PrimaryButton onClick={() => handleSubmit()}>
-                Continue
-              </PrimaryButton>
-            </Link>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="eg. https://suchen.mobile.de/fahrzeuge/details..."
+            className="outline-none w-full border-1 w-full px-2 py-1.5 rounded-sm border-[#2154A2] focus:border-2 font-montserrat"
+            onChange={(e) => setTheurl(e.target.value)}
+            value={theurl}
+          ></input>
+          <p className="font-montserrat mt-2 font-medium">
+            or
+            <button onClick={() => onNext(3)}>
+              <span className="text-primary underline text-lg">
+                Manually Fill Form
+              </span>
+            </button>
+          </p>
+          <div className="w-full flex mt-4 justify-end">
+            <div className="flex gap-4">
+              <PrimaryButton type="submit">Continue</PrimaryButton>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

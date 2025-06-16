@@ -1,5 +1,5 @@
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Manufacturer from "./FirstEleven/Manufacturer";
 import Model from "./FirstEleven/Model";
 import VehicleType from "./FirstEleven/VehicleType";
@@ -21,90 +21,107 @@ export default function OnlineEvaluation() {
   const [searchParams] = useSearchParams();
   const stepParam = searchParams.get("step");
   const hasStep = stepParam !== null;
-  const initialStep = parseInt(stepParam) || 0;
+  const initialStep = parseInt(stepParam) || 1;
   const [step, setStep] = useState(initialStep);
+  const navigate = useNavigate();
 
-  const handleNext = () => {
-    if (step < 15) return setStep(step + 1);
+  const handleNext = (i) => {
+    if (i) return setStep(i);
+    if (step < 16) return setStep(step + 1);
     else return;
   };
-  const handleBack = () => {
-    if (step > 0) return setStep(step - 1);
+  const handleBack = (i) => {
+    if (i) return setStep(i);
+    if (step > 1) return setStep(step - 1);
     else return;
   };
+
+  useEffect(() => {
+    if (step !== initialStep) {
+      searchParams.set("step", step);
+      navigate(`?${searchParams.toString()}`, { replace: true });
+    }
+  }, [step]);
 
   return (
-    <div className="w-full md:w-10/12 lg:w-9/12 flex flex-col items-center justify-center">
-      {step === 0 && <PasteLink onNext={handleNext} />}
-      {step === 1 && (
-        <Manufacturer
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 2 && (
-        <Model onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
-      )}
-      {step === 3 && (
-        <VehicleType
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 4 && (
-        <FirstRegistration
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 5 && (
-        <Mileage onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
-      )}
-      {step === 6 && (
-        <EngineSpecification
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 7 && (
-        <FuelType onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
-      )}
-      {step === 8 && (
-        <Transmission
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 9 && (
-        <Drive onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
-      )}
-      {step === 10 && (
-        <Color onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
-      )}
-      {step === 11 && (
-        <PriceAsAdvertised
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 12 && (
-        <CustomerPhoneNumber
-          onNext={handleNext}
-          onBack={handleBack}
-          hasStep={hasStep}
-        />
-      )}
-      {step === 13 && <IncompleteFormPage />}
-      {step === 14 && <OnlineSummary />}
-      {step > 0 && step < 13 && (
-        <ProgressBar progress={Math.round(((step - 1) / 12) * 100)} />
-      )}
+    <div className="min-h-full w-full  flex flex-col items-center justify-center">
+      <div></div>
+      <div className="px-4 flex-grow flex items-center justify-center w-full md:w-10/12 lg:w-11/12">
+        {step === 1 && <PasteLink onNext={handleNext} />}
+        {step === 2 && (
+          <Manufacturer
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 3 && (
+          <Model onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+        )}
+        {step === 4 && (
+          <VehicleType
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 5 && (
+          <FirstRegistration
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 6 && (
+          <Mileage onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+        )}
+        {step === 7 && (
+          <EngineSpecification
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 8 && (
+          <FuelType onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+        )}
+        {step === 9 && (
+          <Transmission
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 10 && (
+          <Drive onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+        )}
+        {step === 11 && (
+          <Color onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+        )}
+        {step === 12 && (
+          <PriceAsAdvertised
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 13 && (
+          <CustomerPhoneNumber
+            onNext={handleNext}
+            onBack={handleBack}
+            hasStep={hasStep}
+          />
+        )}
+        {step === 14 && (
+          <IncompleteFormPage onBack={handleBack} onNext={handleNext} />
+        )}
+        {step === 15 && <OnlineSummary onBack={handleBack} />}
+      </div>
+      <div className="px-4 flex justify-center w-full md:w-10/12 lg:w-11/12">
+        {step > 1 && step < 14 && (
+          <ProgressBar progress={Math.round(((step - 2) / 12) * 100)} />
+        )}
+      </div>
     </div>
   );
 }

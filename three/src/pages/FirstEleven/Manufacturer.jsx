@@ -34,8 +34,8 @@ export default function Manufacturer({ onNext, onBack, hasStep }) {
               </TertiaryButton>
             )}
 
-            <SecondaryButton onClick={onBack}>Back</SecondaryButton>
-            <PrimaryButton onClick={onNext}>Continue</PrimaryButton>
+            <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
+            <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

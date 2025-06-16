@@ -18,7 +18,7 @@ const summary = [
   { label: "Customer Phone Number", value: "+49 30 12345678" },
 ];
 
-export default function OnlineSummary() {
+export default function OnlineSummary({ onBack }) {
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <h2 className="font-poppins font-semibold text-3xl text-[#2154A2]">
@@ -43,13 +43,7 @@ export default function OnlineSummary() {
         ))}
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            <Link to="/onlineevaluation?step=12">
-              <SecondaryButton
-                onClick={() => console.log("Back to previous page")}
-              >
-                Back
-              </SecondaryButton>
-            </Link>
+            <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             <Link to="/onlineeval">
               <PrimaryButton onClick={() => console.log("Next step")}>
                 Continue
