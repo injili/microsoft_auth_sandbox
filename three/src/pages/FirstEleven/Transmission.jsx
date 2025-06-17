@@ -78,7 +78,10 @@ export default function Transmission({
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             <PrimaryButton
               onClick={() => {
-                if (carDetails.transmission_id === null) {
+                if (
+                  typeof carDetails.transmission_id !== "number" ||
+                  !Number.isInteger(carDetails.transmission_id)
+                ) {
                   return setResponseMessage(
                     "Select the vehicle's transmission."
                   );

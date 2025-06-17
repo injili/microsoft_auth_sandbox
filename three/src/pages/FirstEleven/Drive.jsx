@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Drive({ carDetails, setCarDetails, onBack, onNext }) {
   const navigate = useNavigate();
+  const [responseMessage, setResponseMessage] = useState("");
   const [selectedType, setSelectedType] = useState(null);
   const types = [
     { id: 0, label: "Front-wheel" },
@@ -40,6 +41,11 @@ export default function Drive({ carDetails, setCarDetails, onBack, onNext }) {
       <div className="bg-white rounded-sm p-8 items-center justify-center">
         <div className="flex flex-col gap-2">
           <p className="font-montserrat font-medium">Drive</p>
+          {responseMessage && (
+            <p className="text-sm text-red-500 font-montserrat font-semibold">
+              * {responseMessage}
+            </p>
+          )}
           <div className="flex items-center gap-4 flex-wrap max-w-9/12">
             {types.map((option) => (
               <RegularButton
@@ -66,7 +72,21 @@ export default function Drive({ carDetails, setCarDetails, onBack, onNext }) {
               </TertiaryButton>
             )}
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
-            <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
+            <PrimaryButton
+              onClick={() => {
+                if (
+                  typeof carDetails.drive_type_id !== "number" ||
+                  !Number.isInteger(carDetails.drive_type_id)
+                )
+                  return setResponseMessage(
+                    "Select the drive type of the vehicle."
+                  );
+
+                onNext();
+              }}
+            >
+              Continue
+            </PrimaryButton>
           </div>
         </div>
       </div>
