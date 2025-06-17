@@ -129,9 +129,10 @@ export default function OnlineEvaluation() {
         )}
         {step === 5 && (
           <FirstRegistration
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 6 && (

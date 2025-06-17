@@ -44,13 +44,13 @@ export default function Manufacturer({
             type="text"
             onChange={(e) => {
               setCarDetails(() => ({
-                manufacturer: e.target.value,
+                manufacturer: parseInt(e.target.value),
               }));
 
               setIsInValid(false);
               setResponseMessage("");
             }}
-            value={carDetails.manufacturer || ""}
+            value={carDetails.manufacturer ?? ""}
             className={`outline-none bg-white border min-w-96 max-w-96 px-2 p-2 rounded-sm ${
               isInValid ? "border-red-500" : "border-[#2154A2]"
             } focus:border-2 font-montserrat`}
@@ -59,7 +59,7 @@ export default function Manufacturer({
               --Select Manufacturer--
             </option>
             {vehicle.map((option, index) => (
-              <option key={index} value={option.manufacturer}>
+              <option key={index} value={index}>
                 {option.manufacturer}
               </option>
             ))}

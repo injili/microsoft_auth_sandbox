@@ -114,13 +114,13 @@ export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
             onChange={(e) => {
               setCarDetails((prev) => ({
                 ...prev,
-                model: e.target.value,
-                type: "",
+                model: parseInt(e.target.value),
+                type: null,
               }));
               setIsInValid(false);
               setResponseMessage("");
             }}
-            value={carDetails.model || ""}
+            value={carDetails.model ?? ""}
             type="text"
             className={`outline-none bg-white border min-w-96 max-w-96 px-2 p-2 rounded-sm ${
               isInValid ? "border-red-500" : "border-[#2154A2]"
@@ -129,13 +129,11 @@ export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
             <option value="" disabled hidden>
               --Select Model --
             </option>
-            {vehicle
-              .find((v) => v.manufacturer == carDetails.manufacturer)
-              ?.models.map((option, index) => (
-                <option key={index} value={option.model}>
-                  {option.model}
-                </option>
-              ))}
+            {vehicle[carDetails.manufacturer]?.models.map((option, index) => (
+              <option key={index} value={index}>
+                {option.model}
+              </option>
+            ))}
           </select>
         </div>
         <div className="w-full flex mt-4 justify-end">

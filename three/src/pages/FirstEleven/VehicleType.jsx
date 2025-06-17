@@ -3,7 +3,7 @@ import TertiaryButton from "../../components/tertiaryButton";
 import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 export default function VehicleType({
   carDetails,
   setCarDetails,
@@ -12,7 +12,6 @@ export default function VehicleType({
 }) {
   const navigate = useNavigate();
   const [responseMessage, setResponseMessage] = useState("");
-
   const [selectedType, setSelectedType] = useState(null);
 
   const vehicle = [
@@ -98,9 +97,34 @@ export default function VehicleType({
     },
   ];
 
-  const selectedModelObj = vehicle
-    .find((v) => v.manufacturer === carDetails.manufacturer)
-    ?.models.find((m) => m.model === carDetails.model);
+  const selectedModelObj = useMemo(() => {
+    const manufacturerIndex = carDetails.manufacturer;
+    const modelIndex = carDetails.model;
+
+    if (
+      typeof manufacturerIndex === "number" &&
+      typeof modelIndex === "number" &&
+      vehicle[manufacturerIndex] &&
+      vehicle[manufacturerIndex].models[modelIndex]
+    ) {
+      return vehicle[manufacturerIndex].models[modelIndex];
+    }
+
+    return onBack();
+  }, [carDetails.manufacturer, carDetails.model]);
+
+  useEffect(() => {
+    if (!carDetails.model || !carDetails.manufacturer) return onBack();
+  });
+
+  useEffect(() => {
+    if (
+      carDetails.type !== undefined &&
+      selectedModelObj?.types[carDetails.type]
+    ) {
+      setSelectedType(selectedModelObj.types[carDetails.type]);
+    }
+  }, [carDetails.type, selectedModelObj]);
 
   const handleType = (type) => {
     setSelectedType((prev) => (prev === type ? null : type));
@@ -129,7 +153,7 @@ export default function VehicleType({
               <RegularButton
                 key={index}
                 onClick={() => {
-                  setCarDetails((prev) => ({ ...prev, type: type }));
+                  setCarDetails((prev) => ({ ...prev, type: index }));
                   handleType(type);
                 }}
                 showIcon={selectedType === type}
@@ -149,7 +173,7 @@ export default function VehicleType({
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             <PrimaryButton
               onClick={() => {
-                if (!carDetails.type) {
+                if (carDetails.type === undefined || carDetails.type === null) {
                   setResponseMessage(
                     "Select a vehicle manufacturer to continue."
                   );
