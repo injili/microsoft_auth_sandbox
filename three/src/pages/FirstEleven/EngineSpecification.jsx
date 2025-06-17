@@ -2,9 +2,52 @@ import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 import TertiaryButton from "../../components/tertiaryButton";
+import { useEffect, useState } from "react";
 
-export default function EngineSpecification({ onBack, onNext, hasStep }) {
+export default function EngineSpecification({
+  carDetails,
+  setCarDetails,
+  onBack,
+  onNext,
+}) {
+  const [kw, setKw] = useState("");
+  const [ps, setPs] = useState("");
+  const [ccm, setCcm] = useState("");
+
+  const [responseMessage, setResponseMessage] = useState("");
+  const [isInValid, setIsInValid] = useState(false);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (carDetails.engine_specification) {
+      setKw(carDetails.engine_specification.kw);
+      setPs(carDetails.engine_specification.ps);
+      setCcm(carDetails.engine_specification.ccm);
+    }
+  }, [carDetails.engine_specification]);
+
+  useEffect(() => {
+    console.log(kw);
+    console.log(ps);
+    console.log(ccm);
+  }, [kw, ps, ccm]);
+
+  const handleSubmit = () => {
+    if (!kw || !ps || !ccm) {
+      setIsInValid(true);
+      setResponseMessage("Fill out the engine specification.");
+      return;
+    }
+
+    setCarDetails((prev) => ({
+      ...prev,
+      engine_specification: { kw: kw, ps: ps, ccm: ccm },
+    }));
+
+    onNext();
+  };
+
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
@@ -16,18 +59,27 @@ export default function EngineSpecification({ onBack, onNext, hasStep }) {
         </p>
       </div>
       <div className="bg-white rounded-sm p-8 items-center justify-center">
+        {responseMessage && (
+          <p className="text-sm text-red-500 font-montserrat font-semibold">
+            * {responseMessage}
+          </p>
+        )}
         <div className="flex gap-4 flex-wrap">
           <div className="flex flex-col gap-2">
             <p className="font-montserrat font-medium">kW</p>
             <input
-              type="text"
+              type="number"
+              value={kw}
+              onChange={(e) => setKw(parseInt(e.target.value))}
               className="outline-none  min-w-62 border-1 max-w-62 px-2 py-1.5 rounded-sm border-[#2154A2] focus-within:border-2 font-montserrat"
             ></input>
           </div>
           <div className="flex flex-col gap-2">
             <p className="font-montserrat font-medium">PS</p>
             <input
-              type="text"
+              type="number"
+              value={ps}
+              onChange={(e) => setPs(parseInt(e.target.value))}
               className="outline-none  min-w-62 border-1 max-w-62 px-2 py-1.5 rounded-sm border-[#2154A2] focus-within:border-2 font-montserrat"
             ></input>
           </div>
@@ -35,7 +87,9 @@ export default function EngineSpecification({ onBack, onNext, hasStep }) {
           <div className="flex flex-col gap-2">
             <p className="font-montserrat font-medium">ccm</p>
             <input
-              type="text"
+              type="number"
+              value={ccm}
+              onChange={(e) => setCcm(parseInt(e.target.value))}
               className="outline-none min-w-62 border-1 max-w-62 px-2 py-1.5 rounded-sm border-[#2154A2] focus-within:border-2 font-montserrat"
             ></input>
           </div>
@@ -43,13 +97,13 @@ export default function EngineSpecification({ onBack, onNext, hasStep }) {
 
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            {hasStep && (
+            {carDetails.customerPhoneNumber && (
               <TertiaryButton onClick={() => navigate("/onlinesummary")}>
                 Go to Summary
               </TertiaryButton>
             )}
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
-            <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
+            <PrimaryButton onClick={handleSubmit}>Continue</PrimaryButton>
           </div>
         </div>
       </div>

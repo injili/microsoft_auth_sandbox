@@ -136,13 +136,19 @@ export default function OnlineEvaluation() {
           />
         )}
         {step === 6 && (
-          <Mileage onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+          <Mileage
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
         )}
         {step === 7 && (
           <EngineSpecification
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 8 && (
