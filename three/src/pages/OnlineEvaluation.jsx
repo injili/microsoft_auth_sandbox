@@ -161,13 +161,19 @@ export default function OnlineEvaluation() {
         )}
         {step === 9 && (
           <Transmission
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 10 && (
-          <Drive onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+          <Drive
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
         )}
         {step === 11 && (
           <Color onNext={handleNext} onBack={handleBack} hasStep={hasStep} />

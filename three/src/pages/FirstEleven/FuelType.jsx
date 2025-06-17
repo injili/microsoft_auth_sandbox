@@ -24,14 +24,7 @@ export default function FuelType({
 
   useEffect(() => {
     if (!carDetails.engine_specification) return onBack();
-    const fuelId = carDetails.engine_specification.fuel_type_id;
 
-    if (typeof fuelId === "number" && fuelId >= 0 && fuelId < types.length) {
-      setSelectedType(types[fuelId].label);
-    }
-  }, [carDetails.engine_specification]);
-
-  useEffect(() => {
     const fuelId = carDetails.engine_specification?.fuel_type_id;
     const match = types.find((type) => type.id === fuelId);
     if (match) setSelectedType(match.label);
@@ -88,7 +81,17 @@ export default function FuelType({
               </TertiaryButton>
             )}
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
-            <PrimaryButton onClick={() => onNext()}>Continue</PrimaryButton>
+            <PrimaryButton
+              onClick={() => {
+                if (carDetails.engine_specification.fuel_type_id === null) {
+                  setResponseMessage("Select a fuel type");
+                  return;
+                }
+                onNext();
+              }}
+            >
+              Continue
+            </PrimaryButton>
           </div>
         </div>
       </div>

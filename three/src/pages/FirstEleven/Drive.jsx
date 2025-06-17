@@ -3,15 +3,30 @@ import PrimaryButton from "../../components/primaryButton";
 import RegularButton from "../../components/regularButton";
 import SecondaryButton from "../../components/secondaryButton";
 import TertiaryButton from "../../components/tertiaryButton";
+import { useEffect, useState } from "react";
 
-export default function Drive({ onBack, onNext, hasStep }) {
+export default function Drive({ carDetails, setCarDetails, onBack, onNext }) {
   const navigate = useNavigate();
+  const [selectedType, setSelectedType] = useState(null);
   const types = [
-    { label: "Front-wheel" },
-    { label: "Rear-wheel" },
-    { label: "Four-wheel" },
-    { label: "All-wheel" },
+    { id: 0, label: "Front-wheel" },
+    { id: 1, label: "Rear-wheel" },
+    { id: 2, label: "Four-wheel" },
+    { id: 3, label: "All-wheel" },
   ];
+
+  const handleType = (type) => {
+    setSelectedType((prev) => (prev === type ? null : type));
+  };
+
+  useEffect(() => {
+    if (carDetails.drive_type_id !== null) {
+      const driveId = carDetails?.drive_type_id;
+      const match = types.find((type) => type.id === driveId);
+      if (match) setSelectedType(match.label);
+    }
+  }, []);
+
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">
@@ -26,13 +41,17 @@ export default function Drive({ onBack, onNext, hasStep }) {
         <div className="flex flex-col gap-2">
           <p className="font-montserrat font-medium">Drive</p>
           <div className="flex items-center gap-4 flex-wrap max-w-9/12">
-            {types.map((option, index) => (
+            {types.map((option) => (
               <RegularButton
-                key={index}
+                key={option.id}
                 onClick={() => {
-                  console.log(`Selected rim size: ${option.label}`);
+                  setCarDetails((prev) => ({
+                    ...prev,
+                    drive_type_id: option.id,
+                  }));
+                  handleType(option.label);
                 }}
-                showIcon={false}
+                showIcon={selectedType === option.label}
               >
                 {option.label}
               </RegularButton>
@@ -41,7 +60,7 @@ export default function Drive({ onBack, onNext, hasStep }) {
         </div>
         <div className="w-full flex mt-4 justify-end">
           <div className="flex gap-4">
-            {hasStep && (
+            {carDetails.customerPhoneNumber && (
               <TertiaryButton onClick={() => navigate("/onlinesummary")}>
                 Go to Summary
               </TertiaryButton>
