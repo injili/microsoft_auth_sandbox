@@ -36,7 +36,12 @@ export default function EngineSpecification({
 
     setCarDetails((prev) => ({
       ...prev,
-      engine_specification: { kw: kw, ps: ps, ccm: ccm },
+      engine_specification: {
+        ...prev.engine_specification,
+        kw: kw,
+        ps: ps,
+        ccm: ccm,
+      },
     }));
 
     onNext();

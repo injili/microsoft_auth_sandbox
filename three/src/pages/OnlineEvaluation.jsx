@@ -152,7 +152,12 @@ export default function OnlineEvaluation() {
           />
         )}
         {step === 8 && (
-          <FuelType onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+          <FuelType
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
         )}
         {step === 9 && (
           <Transmission
