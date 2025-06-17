@@ -91,25 +91,6 @@ export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
     },
   ];
 
-  const carData = {
-    manufacturer: "Toyota",
-    model: "Corolla",
-    vehicletype: "sedan",
-    firstregistration: "Jan 2023",
-    milage: 1000,
-    enginespecification: {
-      kw: 200,
-      ps: 30,
-      ccm: 400,
-    },
-    fueltype: "Diesel",
-    transmission: "Automatic",
-    drive: "Front-Wheel",
-    color: "Lilac",
-    priceasadvertised: 15000,
-    customerphonenumber: "+49 30 12345678",
-  };
-
   const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
