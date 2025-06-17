@@ -27,12 +27,6 @@ export default function EngineSpecification({
     }
   }, [carDetails.engine_specification]);
 
-  useEffect(() => {
-    console.log(kw);
-    console.log(ps);
-    console.log(ccm);
-  }, [kw, ps, ccm]);
-
   const handleSubmit = () => {
     if (!kw || !ps || !ccm) {
       setIsInValid(true);
