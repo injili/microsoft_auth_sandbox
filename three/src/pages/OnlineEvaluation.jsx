@@ -176,7 +176,12 @@ export default function OnlineEvaluation() {
           />
         )}
         {step === 11 && (
-          <Color onNext={handleNext} onBack={handleBack} hasStep={hasStep} />
+          <Color
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
         )}
         {step === 12 && (
           <PriceAsAdvertised
