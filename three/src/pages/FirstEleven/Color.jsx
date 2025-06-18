@@ -48,10 +48,6 @@ export default function Color({ carDetails, setCarDetails, onBack, onNext }) {
     setSelectedType(carDetails.color);
   }, [carDetails.color, types]);
 
-  useEffect(() => {
-    console.log(types);
-  }, [types]);
-
   return (
     <div className="flex flex-col gap-4 lg:max-w-5/8 min-w-7/8">
       <div className="flex flex-col gap-2">

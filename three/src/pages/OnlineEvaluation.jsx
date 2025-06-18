@@ -185,16 +185,18 @@ export default function OnlineEvaluation() {
         )}
         {step === 12 && (
           <PriceAsAdvertised
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 13 && (
           <CustomerPhoneNumber
+            carDetails={carDetails}
+            setCarDetails={setCarDetails}
             onNext={handleNext}
             onBack={handleBack}
-            hasStep={hasStep}
           />
         )}
         {step === 14 && (
