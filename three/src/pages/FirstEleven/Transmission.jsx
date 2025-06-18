@@ -55,7 +55,7 @@ export default function Transmission({
               <RegularButton
                 key={option.id}
                 onClick={() => {
-                  setCarDetails((...prev) => ({
+                  setCarDetails((prev) => ({
                     ...prev,
                     transmission_id: option.id,
                   }));
