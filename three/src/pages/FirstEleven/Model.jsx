@@ -3,7 +3,7 @@ import PrimaryButton from "../../components/primaryButton";
 import SecondaryButton from "../../components/secondaryButton";
 import TertiaryButton from "../../components/tertiaryButton";
 import { useState } from "react";
-import EngineSpecification from "./EngineSpecification";
+
 export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
   const [responseMessage, setResponseMessage] = useState("");
   const [isInValid, setIsInValid] = useState(false);
@@ -114,13 +114,13 @@ export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
             onChange={(e) => {
               setCarDetails((prev) => ({
                 ...prev,
-                model: parseInt(e.target.value),
+                model_id: parseInt(e.target.value),
                 type: null,
               }));
               setIsInValid(false);
               setResponseMessage("");
             }}
-            value={carDetails.model ?? ""}
+            value={carDetails.model_id ?? ""}
             type="text"
             className={`outline-none bg-white border min-w-96 max-w-96 px-2 p-2 rounded-sm ${
               isInValid ? "border-red-500" : "border-[#2154A2]"
@@ -129,11 +129,13 @@ export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
             <option value="" disabled hidden>
               --Select Model --
             </option>
-            {vehicle[carDetails.manufacturer]?.models.map((option, index) => (
-              <option key={index} value={index}>
-                {option.model}
-              </option>
-            ))}
+            {vehicle[carDetails.manufacturer_id]?.models.map(
+              (option, index) => (
+                <option key={index} value={index}>
+                  {option.model}
+                </option>
+              )
+            )}
           </select>
         </div>
         <div className="w-full flex mt-4 justify-end">
@@ -146,7 +148,7 @@ export default function Model({ carDetails, setCarDetails, onNext, onBack }) {
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             <PrimaryButton
               onClick={() => {
-                if (!carDetails.model) {
+                if (!carDetails.model_id) {
                   setIsInValid(true);
                   setResponseMessage(
                     "Select a vehicle manufacturer to continue."

@@ -98,8 +98,8 @@ export default function VehicleType({
   ];
 
   const selectedModelObj = useMemo(() => {
-    const manufacturerIndex = carDetails.manufacturer;
-    const modelIndex = carDetails.model;
+    const manufacturerIndex = carDetails.manufacturer_id;
+    const modelIndex = carDetails.model_id;
 
     if (
       typeof manufacturerIndex === "number" &&
@@ -111,20 +111,20 @@ export default function VehicleType({
     }
 
     return onBack();
-  }, [carDetails.manufacturer, carDetails.model]);
+  }, [carDetails.manufacturer_id, carDetails.model_id]);
 
   useEffect(() => {
-    if (!carDetails.model || !carDetails.manufacturer) return onBack();
+    if (!carDetails.model_id || !carDetails.manufacturer_id) return onBack();
   });
 
   useEffect(() => {
     if (
-      carDetails.type !== undefined &&
-      selectedModelObj?.types[carDetails.type]
+      carDetails.type_id !== undefined &&
+      selectedModelObj?.types[carDetails.type_id]
     ) {
-      setSelectedType(selectedModelObj.types[carDetails.type]);
+      setSelectedType(selectedModelObj.types[carDetails.type_id]);
     }
-  }, [carDetails.type, selectedModelObj]);
+  }, [carDetails.type_id, selectedModelObj]);
 
   const handleType = (type) => {
     setSelectedType((prev) => (prev === type ? null : type));
@@ -153,7 +153,7 @@ export default function VehicleType({
               <RegularButton
                 key={index}
                 onClick={() => {
-                  setCarDetails((prev) => ({ ...prev, type: index }));
+                  setCarDetails((prev) => ({ ...prev, type_id: index }));
                   handleType(type);
                 }}
                 showIcon={selectedType === type}
@@ -173,7 +173,10 @@ export default function VehicleType({
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             <PrimaryButton
               onClick={() => {
-                if (carDetails.type === undefined || carDetails.type === null) {
+                if (
+                  carDetails.type_id === undefined ||
+                  carDetails.type_id === null
+                ) {
                   setResponseMessage(
                     "Select a vehicle manufacturer to continue."
                   );

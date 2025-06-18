@@ -44,13 +44,13 @@ export default function Manufacturer({
             type="text"
             onChange={(e) => {
               setCarDetails(() => ({
-                manufacturer: parseInt(e.target.value),
+                manufacturer_id: parseInt(e.target.value),
               }));
 
               setIsInValid(false);
               setResponseMessage("");
             }}
-            value={carDetails.manufacturer ?? ""}
+            value={carDetails.manufacturer_id ?? ""}
             className={`outline-none bg-white border min-w-96 max-w-96 px-2 p-2 rounded-sm ${
               isInValid ? "border-red-500" : "border-[#2154A2]"
             } focus:border-2 font-montserrat`}
@@ -76,7 +76,7 @@ export default function Manufacturer({
             <SecondaryButton onClick={() => onBack()}>Back</SecondaryButton>
             <PrimaryButton
               onClick={() => {
-                if (!carDetails.manufacturer) {
+                if (!carDetails.manufacturer_id) {
                   setIsInValid(true);
                   setResponseMessage(
                     "Select a vehicle manufacturer to continue."
